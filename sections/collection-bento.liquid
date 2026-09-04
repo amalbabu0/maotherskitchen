@@ -1,0 +1,203 @@
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<div class="color-custom-{{ section.id }} collection-bento">
+  <div class="page-width">
+    <ul class="collection-bento__grid" role="list">
+      {%- for block in section.blocks -%}
+        {%- assign collection = block.settings.collection -%}
+        {%- assign tile_pos = forloop.index0 | modulo: 6 -%}
+        {%- if collection != blank -%}
+          <li
+            class="collection-bento__item{% if tile_pos == 0 %} collection-bento__item--big-tall{% elsif tile_pos == 3 %} collection-bento__item--tall{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            <a href="{{ collection.url }}" class="collection-bento__link">
+              <div class="collection-bento__media">
+                {%- if collection.image -%}
+                  {{ collection.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: collection.title }}
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'collection-bento__placeholder' }}
+                {%- endif -%}
+              </div>
+              <div class="collection-bento__overlay"></div>
+              <div class="collection-bento__content">
+                <p class="collection-bento__title">{{ collection.title }}</p>
+                {%- if block.settings.subtitle != blank -%}
+                  <p class="collection-bento__subtitle">{{ block.settings.subtitle }}</p>
+                {%- endif -%}
+                <span class="collection-bento__button">View Collection</span>
+              </div>
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% stylesheet %}
+  .collection-bento { padding-block: 3rem; }
+  .collection-bento__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 250px;
+    grid-auto-flow: dense;
+    gap: 24px;
+  }
+  .collection-bento__item--big-tall { grid-row: span 2; grid-column: span 2; }
+  .collection-bento__item--tall { grid-row: span 2; grid-column: span 1; }
+  .collection-bento__item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #16241C;
+  }
+  .collection-bento__link {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+  .collection-bento__media { position: absolute; inset: 0; }
+  .collection-bento__media img,
+  .collection-bento__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .collection-bento__item:hover .collection-bento__media img { transform: scale(1.08); }
+  .collection-bento__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(24, 58, 43, 0.88), rgba(24, 58, 43, 0.2) 60%, transparent);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .collection-bento__item:hover .collection-bento__overlay,
+  .collection-bento__item:focus-within .collection-bento__overlay { opacity: 1; }
+  .collection-bento__content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1.5rem;
+    gap: 0.4rem;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .collection-bento__item:hover .collection-bento__content,
+  .collection-bento__item:focus-within .collection-bento__content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .collection-bento__title { margin: 0; font-size: 1.9rem; font-weight: 700; color: #FFF7E8; }
+  .collection-bento__item--big-tall .collection-bento__title { font-size: 2.6rem; }
+  .collection-bento__subtitle {
+    margin: 0;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #D99A2B;
+  }
+  .collection-bento__button {
+    margin-top: 0.7rem;
+    display: inline-block;
+    padding: 0.7rem 1.6rem;
+    border-radius: 40px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border: 2px solid #D99A2B;
+    color: #16241C;
+    background: #D99A2B;
+    transition: opacity 0.2s ease;
+  }
+  .collection-bento__item--big-tall .collection-bento__button {
+    background: transparent;
+    border-color: #FFF7E8;
+    color: #FFF7E8;
+  }
+  .collection-bento__button:hover { opacity: 0.85; }
+
+  /* Below desktop: revert to the old plain tile grid — image with the
+     title below it, always visible, no hover-reveal, no bento spans. */
+  @media screen and (max-width: 989px) {
+    .collection-bento__grid {
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: auto;
+      gap: 1rem;
+    }
+    .collection-bento__item--big-tall,
+    .collection-bento__item--tall {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+    .collection-bento__item { background: none; border-radius: 8px; }
+    .collection-bento__media {
+      position: static;
+      aspect-ratio: 1 / 1;
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .collection-bento__item:hover .collection-bento__media img { transform: none; }
+    .collection-bento__overlay { display: none; }
+    .collection-bento__content {
+      position: static;
+      opacity: 1;
+      transform: none;
+      padding: 0.6rem 0 0;
+      gap: 0;
+    }
+    .collection-bento__subtitle,
+    .collection-bento__button { display: none; }
+    .collection-bento__title,
+    .collection-bento__item--big-tall .collection-bento__title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--color-foreground);
+      text-align: center;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .collection-bento__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Collection bento",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    { "type": "color", "id": "background_color", "label": "Background color" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Collection tile",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle / tag" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Collection bento", "blocks": [{ "type": "tile" }, { "type": "tile" }, { "type": "tile" }] }
+  ]
+}
+{% endschema %}

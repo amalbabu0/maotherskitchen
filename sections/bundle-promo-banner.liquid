@@ -2,9 +2,15 @@
   if section.settings.background_color != blank
     render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
   endif
+  assign bg_product = section.blocks.first.settings.product
 %}
 
 <div class="color-custom-{{ section.id }} bundle-promo-banner">
+  {%- if bg_product.featured_image -%}
+    <div class="bundle-promo-banner__bg">
+      {{ bg_product.featured_image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: '' }}
+    </div>
+  {%- endif -%}
   <div class="page-width bundle-promo-banner__inner">
     <div class="bundle-promo-banner__content">
       {%- if section.settings.eyebrow != blank -%}
@@ -17,48 +23,69 @@
         <div class="bundle-promo-banner__text">{{ section.settings.text }}</div>
       {%- endif -%}
       {%- if section.settings.button_label != blank -%}
-        <a href="{{ section.settings.button_link | default: '#' }}" class="button">
+        <a href="{{ section.settings.button_link | default: '#' }}" class="button bundle-promo-banner__button--mobile">
           {{ section.settings.button_label }}
         </a>
       {%- endif -%}
     </div>
-
-    {%- if section.blocks.size > 0 -%}
-      <div class="bundle-promo-banner__products">
-        {%- for block in section.blocks -%}
-          {%- assign product = block.settings.product -%}
-          <a href="{{ product.url | default: '#' }}" class="bundle-promo-banner__product-card" {{ block.shopify_attributes }}>
-            {%- if product.featured_image -%}
-              {{ product.featured_image | image_url: width: 400 | image_tag: loading: 'lazy', alt: product.title }}
-            {%- else -%}
-              {{ 'product-1' | placeholder_svg_tag: 'bundle-promo-banner__placeholder' }}
-            {%- endif -%}
-            <span class="bundle-promo-banner__product-title">{{ product.title | default: 'Select a product' }}</span>
-          </a>
-          {%- unless forloop.last -%}<span class="bundle-promo-banner__plus" aria-hidden="true">+</span>{%- endunless -%}
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
   </div>
+  {%- if section.settings.button_label != blank -%}
+    <a href="{{ section.settings.button_link | default: '#' }}" class="button bundle-promo-banner__button--floating">
+      {{ section.settings.button_label }}
+    </a>
+  {%- endif -%}
 </div>
 
 {% stylesheet %}
+  .bundle-promo-banner { position: relative; overflow: hidden; }
+  .bundle-promo-banner__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .bundle-promo-banner__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .bundle-promo-banner__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(24, 58, 43, 0.94) 0%, rgba(24, 58, 43, 0.75) 45%, rgba(24, 58, 43, 0.35) 100%);
+  }
   .bundle-promo-banner__inner {
-    padding-block: 60px;
-    display: grid;
-    gap: 2.5rem;
-    align-items: center;
+    position: relative;
+    z-index: 1;
+    padding-block: 80px;
   }
-  @media screen and (min-width: 750px) {
-    .bundle-promo-banner__inner { grid-template-columns: 1fr 1fr; }
-  }
+  .bundle-promo-banner__content { max-width: 46rem; }
   .bundle-promo-banner__eyebrow { letter-spacing: 0.1em; text-transform: uppercase; font-size: 1.3rem; opacity: 0.85; margin: 0 0 0.5rem; }
   .bundle-promo-banner__heading { margin: 0 0 1rem; }
-  .bundle-promo-banner__products { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-  .bundle-promo-banner__product-card { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; text-decoration: none; color: inherit; width: 120px; }
-  .bundle-promo-banner__product-card img, .bundle-promo-banner__placeholder { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; }
-  .bundle-promo-banner__product-title { font-size: 1.3rem; text-align: center; }
-  .bundle-promo-banner__plus { font-size: 2rem; opacity: 0.6; }
+  .bundle-promo-banner .button {
+    background: #D99A2B !important;
+    border-color: #D99A2B !important;
+    color: #16241C !important;
+  }
+  .bundle-promo-banner__button--mobile {
+    display: block;
+    width: fit-content;
+    margin-inline: auto;
+  }
+  .bundle-promo-banner__button--floating {
+    display: none;
+  }
+  @media screen and (min-width: 750px) {
+    .bundle-promo-banner__button--mobile { display: none; }
+    .bundle-promo-banner__button--floating {
+      display: block;
+      position: absolute;
+      z-index: 2;
+      right: 12%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}

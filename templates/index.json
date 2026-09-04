@@ -16,7 +16,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
+            "text": "<p>Straight from Kerala's kitchens to yours</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -42,7 +42,7 @@
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "Shop all",
+            "label": "Shop the Collection",
             "link": "shopify://collections/all",
             "open_in_new_tab": false,
             "style_class": "button-custom",
@@ -56,16 +56,24 @@
             "custom_width_mobile": 100
           },
           "blocks": {}
+        },
+        "reduce_hero_height": {
+          "type": "custom-liquid",
+          "settings": {
+            "custom_liquid": "<style>#shopify-section-{{ section.id }} .hero{min-height:calc(var(--hero-min-height) - 4cm) !important}</style>"
+          }
         }
       },
       "block_order": [
         "text_YLPk4p",
-        "button_H9gpTf"
+        "button_H9gpTf",
+        "reduce_hero_height"
       ],
       "name": "t:names.hero",
       "settings": {
-        "media_type_1": "image",
+        "media_type_1": "video",
         "image_1": "shopify://shop_images/bg.jpg",
+        "video_1": "shopify://files/videos/Woman_placing_spice_container_on…_202609040455.mp4",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": false,
@@ -82,7 +90,7 @@
         "vertical_alignment_flex_direction_column": "flex-end",
         "gap": 24,
         "section_width": "page-width",
-        "section_height": "medium",
+        "section_height": "large",
         "section_height_custom": 50,
         "background_color": "rgba(0,0,0,0)",
         "toggle_overlay": true,
@@ -97,30 +105,125 @@
     },
     "shipping_note": {
       "type": "section",
-      "settings": {
-        "content_direction": "row",
-        "horizontal_alignment": "center",
-        "horizontal_alignment_flex_direction_column": "center",
-        "section_width": "page-width",
-        "background_media": "none",
-        "background_color": "#183A2B",
-        "border": "none",
-        "padding-block-start": 14,
-        "padding-block-end": 14
-      },
       "blocks": {
         "text": {
           "type": "text",
           "settings": {
             "text": "<p>Free Shipping on Orders Above ₹499 | COD Available</p>",
             "width": "100%",
+            "max_width": "normal",
             "alignment": "center",
             "type_preset": "paragraph",
-            "text_color": "#FFF7E8"
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "#fff7e8",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text"
+      ],
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "#183a2b",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 14,
+        "padding-block-end": 14
+      }
+    },
+    "trust_bar": {
+      "type": "trust-bar",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "heading": "Authentic Products",
+            "text": "Carefully selected quality products"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "icon": "lock",
+            "heading": "Secure Payments",
+            "text": "Safe and trusted checkout"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "icon": "check_box",
+            "heading": "COD Available",
+            "text": "Convenient payment options"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "heading": "Fast Delivery",
+            "text": "Reliable shipping and tracking"
           }
         }
       },
-      "block_order": ["text"]
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ],
+      "settings": {
+        "background_color": "#fff7e8"
+      }
+    },
+    "collection_tiles": {
+      "type": "collection-bento",
+      "blocks": {
+        "tile_1": { "type": "tile", "settings": { "collection": "spices-masala", "subtitle": "Stone-Ground Freshness" } },
+        "tile_2": { "type": "tile", "settings": { "collection": "sweets-halwa", "subtitle": "Traditional Recipes" } },
+        "tile_3": { "type": "tile", "settings": { "collection": "snacks", "subtitle": "Crunchy & Homemade" } },
+        "tile_4": { "type": "tile", "settings": { "collection": "pickles-condiments", "subtitle": "Tangy & Bold" } },
+        "tile_5": { "type": "tile", "settings": { "collection": "rice-grains", "subtitle": "Kerala Staples" } },
+        "tile_6": { "type": "tile", "settings": { "collection": "oils", "subtitle": "Cold-Pressed Purity" } }
+      },
+      "block_order": ["tile_1", "tile_2", "tile_3", "tile_4", "tile_5", "tile_6"],
+      "settings": {
+        "background_color": ""
+      }
     },
     "product_list_fa6P9H": {
       "type": "product-list",
@@ -278,7 +381,7 @@
                 "show_tax_info": false,
                 "type_preset": "h6",
                 "width": "100%",
-                "alignment": "left",
+                "alignment": "center",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
@@ -321,162 +424,659 @@
         "padding-block-end": 48
       }
     },
-
-    "trust_bar": {
-      "type": "trust-bar",
-      "settings": { "background_color": "#FFF7E8" },
-      "blocks": {
-        "item_1": { "type": "item", "settings": { "icon": "leaf", "heading": "Authentic Products", "text": "Carefully selected quality products" } },
-        "item_2": { "type": "item", "settings": { "icon": "lock", "heading": "Secure Payments", "text": "Safe and trusted checkout" } },
-        "item_3": { "type": "item", "settings": { "icon": "check_box", "heading": "COD Available", "text": "Convenient payment options" } },
-        "item_4": { "type": "item", "settings": { "icon": "truck", "heading": "Fast Delivery", "text": "Reliable shipping and tracking" } }
-      },
-      "block_order": ["item_1", "item_2", "item_3", "item_4"]
-    },
-
-    "collection_tiles": {
-      "type": "collection-tiles-custom",
-      "settings": {
-        "background_color": ""
-      },
-      "blocks": {
-        "tile_1": { "type": "tile", "settings": { "collection": "spices-masala" } },
-        "tile_2": { "type": "tile", "settings": { "collection": "sweets-halwa" } },
-        "tile_3": { "type": "tile", "settings": { "collection": "snacks" } },
-        "tile_4": { "type": "tile", "settings": { "collection": "pickles-condiments" } },
-        "tile_5": { "type": "tile", "settings": { "collection": "rice-grains" } },
-        "tile_6": { "type": "tile", "settings": { "collection": "oils" } },
-        "tile_7": { "type": "tile", "settings": { "collection": "combo-gift-packs" } }
-      },
-      "block_order": ["tile_1", "tile_2", "tile_3", "tile_4", "tile_5", "tile_6", "tile_7"]
-    },
-
     "bundle_promo": {
       "type": "bundle-promo-banner",
-      "settings": { "background_color": "#183A2B" },
       "blocks": {
-        "bundle_product_1": { "type": "product", "settings": { "product": "festive-sweets-gift-box" } },
-        "bundle_product_2": { "type": "product", "settings": { "product": "turmeric-powder-haldi-powder" } },
-        "bundle_product_3": { "type": "product", "settings": { "product": "garam-masala-powder" } }
+        "bundle_product_1": {
+          "type": "product",
+          "settings": {
+            "product": "everyday-essentials-combo"
+          }
+        }
       },
-      "block_order": ["bundle_product_1", "bundle_product_2", "bundle_product_3"]
+      "block_order": [
+        "bundle_product_1"
+      ],
+      "settings": {
+        "background_color": "#183a2b",
+        "eyebrow": "COMPLETE YOUR FAVOURITES",
+        "heading": "Save More With Our Combo Offers",
+        "text": "<p>Turmeric, garam masala and matta rice bundled together at a better price.</p>",
+        "button_label": "Shop the Combo",
+        "button_link": "shopify://products/everyday-essentials-combo"
+      }
     },
-
-    "shoppable_videos": {
-      "type": "shoppable-videos",
-      "settings": { "background_color": "#FFF7E8" },
+    "17885122455f935fcd": {
+      "type": "_blocks",
       "blocks": {
-        "video_1": { "type": "video", "settings": { "product": "banana-chips-kerala-style", "caption": "Crispy Banana Chips", "video_asset": "banana-chips-frying.mp4" } },
-        "video_2": { "type": "video", "settings": { "product": "black-halwa-authentic-kerala-halwa", "caption": "Kerala Black Halwa", "video_asset": "kerala-sweets-halwa.mp4" } },
-        "video_3": { "type": "video", "settings": { "product": "mango-pickle-achar", "caption": "Homestyle Mango Pickle", "video_asset": "mango-pickle-jar.mp4" } },
-        "video_4": { "type": "video", "settings": { "product": "pure-coconut-oil", "caption": "Cold-Pressed Coconut Oil", "video_asset": "coconut-oil-pouring.mp4" } }
+        "whatmore_shoppable_videos_app_block_H9pjkt": {
+          "type": "shopify://apps/whatmore-shoppable-videos/blocks/app-block/20db8a72-315a-4364-8885-64219ee48303",
+          "settings": {
+            "heading": "Watch and Buy",
+            "widget-identity": "wgt_default",
+            "template-type": "template-h",
+            "title-font-size": 40,
+            "title-font-size-portrait": 24,
+            "landscape-padding": 40,
+            "top-bottom-padding": 20,
+            "scroll-video-tile-size": 80,
+            "scroll-video-tile-size-portrait": 80,
+            "min-height": 380
+          }
+        }
       },
-      "block_order": ["video_1", "video_2", "video_3", "video_4"]
+      "block_order": [
+        "whatmore_shoppable_videos_app_block_H9pjkt"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     },
-
     "featured_product": {
       "type": "featured-product-custom",
-      "settings": { "background_color": "#FFF7E8", "eyebrow": "Featured", "product": "festive-sweets-gift-box" }
+      "settings": {
+        "background_color": "#fff7e8",
+        "eyebrow": "Featured",
+        "product": "festive-sweets-gift-box"
+      }
     },
-
-    "fbt": {
-      "type": "frequently-bought-together",
-      "settings": { "background_color": "#FFF7E8" },
-      "blocks": {
-        "fbt_product_1": { "type": "product", "settings": { "product": "turmeric-powder-haldi-powder" } },
-        "fbt_product_2": { "type": "product", "settings": { "product": "garam-masala-powder" } },
-        "fbt_product_3": { "type": "product", "settings": { "product": "matta-unda-rice-short-grain" } }
-      },
-      "block_order": ["fbt_product_1", "fbt_product_2", "fbt_product_3"]
-    },
-
     "reviews": {
       "type": "judge-me-reviews",
-      "settings": { "background_color": "#FFF7E8" },
       "blocks": {
-        "testimonial_1": { "type": "testimonial", "settings": { "rating": 5, "quote": "Tastes exactly like my grandmother's cooking. The banana chips are so crispy and fresh.", "author": "Priya S.", "product_name": "Banana Chips" } },
-        "testimonial_2": { "type": "testimonial", "settings": { "rating": 5, "quote": "Ordered the halwa for Onam and it was a huge hit with the whole family. Will definitely order again.", "author": "Arun K.", "product_name": "Black Halwa" } },
-        "testimonial_3": { "type": "testimonial", "settings": { "rating": 4, "quote": "Good quality spices, packaging was neat and delivery was quick. COD made it easy to try.", "author": "Meera R.", "product_name": "Turmeric Powder" } }
+        "judge_me_reviews_cards_carousel_JitXje": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "reviews_selection": "all",
+            "products": [],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "",
+            "star_rating": "all",
+            "show_review_media": true,
+            "display_order": "media_first",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 20,
+            "review_length": "medium",
+            "text_size": "medium",
+            "image_ratio": "1",
+            "reviews_shown": 4,
+            "show_reviewer_name": true,
+            "show_product_name": true,
+            "hide_arrows_mobile": true,
+            "arrows_position": "sides",
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "header_text_color": "#000000",
+            "text_color": "#000000",
+            "card_color": "#f9f9f9",
+            "stars_color": "",
+            "arrows_color": "#000000",
+            "transition_speed": 5,
+            "header_text": "Customers are saying",
+            "show_average_rating": true,
+            "rating_display": "default"
+          }
+        }
       },
-      "block_order": ["testimonial_1", "testimonial_2", "testimonial_3"]
+      "block_order": [
+        "judge_me_reviews_cards_carousel_JitXje"
+      ],
+      "settings": {
+        "background_color": "#fff7e8",
+        "heading": "Loved by Our Customers",
+        "subheading": "Real experiences from customers who enjoy our products."
+      }
     },
-
     "why_choose_us": {
       "type": "section",
+      "blocks": {
+        "col_1": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 8,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 10,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "heading": {
+              "type": "text",
+              "settings": {
+                "text": "<h4>Authentic Quality</h4>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Products selected with care.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "heading",
+            "text"
+          ]
+        },
+        "col_2": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 8,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 10,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "heading": {
+              "type": "text",
+              "settings": {
+                "text": "<h4>Made for Everyday Moments</h4>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Good food made simple.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "heading",
+            "text"
+          ]
+        },
+        "col_3": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 8,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 10,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "heading": {
+              "type": "text",
+              "settings": {
+                "text": "<h4>Trusted Service</h4>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Secure ordering and reliable delivery.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "heading",
+            "text"
+          ]
+        },
+        "col_4": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 8,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 10,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "heading": {
+              "type": "text",
+              "settings": {
+                "text": "<h4>Customer First</h4>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>We're here whenever you need us.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "heading",
+            "text"
+          ]
+        }
+      },
+      "block_order": [
+        "col_1",
+        "col_2",
+        "col_3",
+        "col_4"
+      ],
       "settings": {
         "content_direction": "row",
         "vertical_on_mobile": true,
         "horizontal_alignment": "space-between",
         "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
         "gap": 16,
         "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#183A2B",
+        "background_color": "#183a2b",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
         "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
         "padding-block-start": 56,
         "padding-block-end": 56
-      },
-      "blocks": {
-        "col_1": {
-          "type": "group",
-          "settings": { "content_direction": "column", "horizontal_alignment_flex_direction_column": "flex-start", "gap": 8, "width": "fill", "height": "fit", "background_media": "none", "border": "none", "padding-block-start": 10, "padding-block-end": 0 },
-          "blocks": {
-            "heading": { "type": "text", "settings": { "text": "<h4>Authentic Quality</h4>", "width": "100%", "alignment": "center", "type_preset": "h4" } },
-            "text": { "type": "text", "settings": { "text": "<p>Products selected with care.</p>", "width": "100%", "alignment": "center", "type_preset": "rte" } }
-          },
-          "block_order": ["heading", "text"]
-        },
-        "col_2": {
-          "type": "group",
-          "settings": { "content_direction": "column", "horizontal_alignment_flex_direction_column": "flex-start", "gap": 8, "width": "fill", "height": "fit", "background_media": "none", "border": "none", "padding-block-start": 10, "padding-block-end": 0 },
-          "blocks": {
-            "heading": { "type": "text", "settings": { "text": "<h4>Made for Everyday Moments</h4>", "width": "100%", "alignment": "center", "type_preset": "h4" } },
-            "text": { "type": "text", "settings": { "text": "<p>Good food made simple.</p>", "width": "100%", "alignment": "center", "type_preset": "rte" } }
-          },
-          "block_order": ["heading", "text"]
-        },
-        "col_3": {
-          "type": "group",
-          "settings": { "content_direction": "column", "horizontal_alignment_flex_direction_column": "flex-start", "gap": 8, "width": "fill", "height": "fit", "background_media": "none", "border": "none", "padding-block-start": 10, "padding-block-end": 0 },
-          "blocks": {
-            "heading": { "type": "text", "settings": { "text": "<h4>Trusted Service</h4>", "width": "100%", "alignment": "center", "type_preset": "h4" } },
-            "text": { "type": "text", "settings": { "text": "<p>Secure ordering and reliable delivery.</p>", "width": "100%", "alignment": "center", "type_preset": "rte" } }
-          },
-          "block_order": ["heading", "text"]
-        },
-        "col_4": {
-          "type": "group",
-          "settings": { "content_direction": "column", "horizontal_alignment_flex_direction_column": "flex-start", "gap": 8, "width": "fill", "height": "fit", "background_media": "none", "border": "none", "padding-block-start": 10, "padding-block-end": 0 },
-          "blocks": {
-            "heading": { "type": "text", "settings": { "text": "<h4>Customer First</h4>", "width": "100%", "alignment": "center", "type_preset": "h4" } },
-            "text": { "type": "text", "settings": { "text": "<p>We're here whenever you need us.</p>", "width": "100%", "alignment": "center", "type_preset": "rte" } }
-          },
-          "block_order": ["heading", "text"]
-        }
-      },
-      "block_order": ["col_1", "col_2", "col_3", "col_4"]
+      }
     },
-
     "cta_banner": {
       "type": "section",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Taste Something Special Today</h2>",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "center",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "#183a2b",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "subtext": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Explore our collection and discover your next favourite.</p>",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "center",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "#183a2b",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "label": "SHOP NOW",
+            "link": "shopify://collections/all",
+            "open_in_new_tab": false,
+            "style_class": "button-custom",
+            "custom_button_background": "#183a2b",
+            "custom_button_text": "#fff7e8",
+            "custom_button_border": "#183a2b",
+            "link_text_color": "",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text",
+        "subtext",
+        "button"
+      ],
       "settings": {
         "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "center",
         "vertical_alignment_flex_direction_column": "center",
         "gap": 16,
         "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#D99A2B",
+        "background_color": "#d99a2b",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
         "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
         "padding-block-start": 64,
         "padding-block-end": 64
-      },
-      "blocks": {
-        "text": { "type": "text", "settings": { "text": "<h2>Taste Something Special Today</h2>", "width": "100%", "max_width": "narrow", "alignment": "center", "type_preset": "h2", "text_color": "#183A2B" } },
-        "subtext": { "type": "text", "settings": { "text": "<p>Explore our collection and discover your next favourite.</p>", "width": "100%", "max_width": "narrow", "alignment": "center", "type_preset": "rte", "text_color": "#183A2B" } },
-        "button": { "type": "button", "settings": { "label": "SHOP NOW", "link": "shopify://collections/all", "style_class": "button-custom", "custom_button_background": "#183A2B", "custom_button_text": "#FFF7E8", "custom_button_border": "#183A2B", "width": "fit-content" } }
-      },
-      "block_order": ["text", "subtext", "button"]
+      }
     }
   },
   "order": [
@@ -486,9 +1086,8 @@
     "collection_tiles",
     "product_list_fa6P9H",
     "bundle_promo",
-    "shoppable_videos",
+    "17885122455f935fcd",
     "featured_product",
-    "fbt",
     "reviews",
     "why_choose_us",
     "cta_banner"

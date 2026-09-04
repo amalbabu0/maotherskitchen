@@ -7,6 +7,19 @@
   endif
 %}
 
+{% stylesheet %}
+  /* Hover-only size change on product cards — no other style changes.
+     Scoped to this section file, so it only ever affects the homepage
+     "Products" grid it renders. */
+  .section-resource-list[data-testid="product-list"] product-card {
+    display: block;
+    transition: transform 0.2s ease;
+  }
+  .section-resource-list[data-testid="product-list"] .resource-list__item:hover product-card {
+    transform: scale(1.04);
+  }
+{% endstylesheet %}
+
 <div
   class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
 ></div>

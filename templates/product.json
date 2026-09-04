@@ -167,7 +167,7 @@
                     "text_color": "",
                     "padding-block-start": 4,
                     "padding-block-end": 0,
-                    "padding-inline-start": 0,
+                    "padding-inline-start": 8,
                     "padding-inline-end": 0
                   },
                   "blocks": {}
@@ -267,12 +267,6 @@
                     "custom_button_border": "{{ settings.color_palette.background }}"
                   },
                   "blocks": {}
-                },
-                "accelerated-checkout": {
-                  "type": "accelerated-checkout",
-                  "static": true,
-                  "settings": {},
-                  "blocks": {}
                 }
               },
               "block_order": []
@@ -306,10 +300,31 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "unify_app_cta_styles": {
+              "type": "custom-liquid",
+              "settings": {
+                "custom_liquid": "<style>.avisbls-container button,.wsatc-add-to-cart-btn,.cbb-frequently-bought-container button{background:var(--color-primary-button-background)!important;color:var(--color-primary-button-text)!important;border-radius:var(--style-border-radius-buttons-primary)!important;font-family:var(--button-font-family-primary)!important;border:none!important;box-shadow:none!important;text-transform:var(--button-text-case-primary)!important}.avisbls-container button:hover,.wsatc-add-to-cart-btn:hover,.cbb-frequently-bought-container button:hover{opacity:.85}</style>"
+              }
+            },
+            "wishlist_toggle_product": {
+              "type": "custom-liquid",
+              "settings": {
+                "custom_liquid": "<div style=\"display:flex;align-items:center;gap:8px;margin-top:8px\">{% render 'wishlist-toggle', product: product %}<span style=\"font-size:1.3rem;opacity:.75\">Save to Wishlist</span></div>"
+              }
+            },
+            "recently_viewed_tracker": {
+              "type": "custom-liquid",
+              "settings": {
+                "custom_liquid": "<script src=\"{{ 'recently-viewed.js' | asset_url }}\" type=\"module\"></script><recently-viewed-tracker data-handle=\"{{ product.handle }}\" hidden></recently-viewed-tracker>"
+              }
             }
           },
           "block_order": [
             "group_icgrde",
+            "unify_app_cta_styles",
+            "wishlist_toggle_product",
+            "recently_viewed_tracker",
             "benefit_pills",
             "divider_VJhene",
             "variant_picker_R3rGDr",
@@ -334,49 +349,23 @@
         "padding-block-end": 0
       }
     },
-    "bundle_promo": {
-      "type": "bundle-promo-banner",
-      "settings": { "background_color": "#183A2B" },
-      "blocks": {
-        "bundle_product_1": { "type": "product", "settings": { "product": "festive-sweets-gift-box" } },
-        "bundle_product_2": { "type": "product", "settings": { "product": "black-halwa-authentic-kerala-halwa" } },
-        "bundle_product_3": { "type": "product", "settings": { "product": "mango-pickle-achar" } }
-      },
-      "block_order": ["bundle_product_1", "bundle_product_2", "bundle_product_3"]
-    },
 
-    "fbt": {
-      "type": "frequently-bought-together",
-      "settings": { "background_color": "#FFF7E8" },
-      "blocks": {
-        "fbt_product_1": { "type": "product", "settings": { "product": "turmeric-powder-haldi-powder" } },
-        "fbt_product_2": { "type": "product", "settings": { "product": "garam-masala-powder" } },
-        "fbt_product_3": { "type": "product", "settings": { "product": "matta-unda-rice-short-grain" } }
-      },
-      "block_order": ["fbt_product_1", "fbt_product_2", "fbt_product_3"]
-    },
-
-    "shoppable_videos": {
-      "type": "shoppable-videos",
-      "settings": { "background_color": "#FFF7E8" },
-      "blocks": {
-        "video_1": { "type": "video", "settings": { "product": "banana-chips-kerala-style", "caption": "Crispy Banana Chips", "video_asset": "banana-chips-frying.mp4" } },
-        "video_2": { "type": "video", "settings": { "product": "black-halwa-authentic-kerala-halwa", "caption": "Kerala Black Halwa", "video_asset": "kerala-sweets-halwa.mp4" } },
-        "video_3": { "type": "video", "settings": { "product": "pure-coconut-oil", "caption": "Cold-Pressed Coconut Oil", "video_asset": "coconut-oil-pouring.mp4" } },
-        "video_4": { "type": "video", "settings": { "product": "mango-pickle-achar", "caption": "Homestyle Mango Pickle", "video_asset": "mango-pickle-jar.mp4" } }
-      },
-      "block_order": ["video_1", "video_2", "video_3", "video_4"]
-    },
 
     "reviews": {
       "type": "judge-me-reviews",
-      "settings": { "background_color": "#FFF7E8" },
+      "settings": { "background_color": "#FFF7E8", "heading": "Loved by Our Customers", "subheading": "Real experiences from customers who enjoy our products." },
       "blocks": {
-        "testimonial_1": { "type": "testimonial", "settings": { "rating": 5, "quote": "Tastes exactly like my grandmother's cooking. The banana chips are so crispy and fresh.", "author": "Priya S.", "product_name": "Banana Chips" } },
-        "testimonial_2": { "type": "testimonial", "settings": { "rating": 5, "quote": "Ordered the halwa for Onam and it was a huge hit with the whole family. Will definitely order again.", "author": "Arun K.", "product_name": "Black Halwa" } },
-        "testimonial_3": { "type": "testimonial", "settings": { "rating": 4, "quote": "Good quality spices, packaging was neat and delivery was quick. COD made it easy to try.", "author": "Meera R.", "product_name": "Turmeric Powder" } }
+        "judge_me_reviews_review_widget_A7mB4A": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
       },
-      "block_order": ["testimonial_1", "testimonial_2", "testimonial_3"]
+      "block_order": ["judge_me_reviews_review_widget_A7mB4A"]
     },
 
     "product_recommendations_qggXJq": {
@@ -520,14 +509,22 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "recently_viewed_section": {
+      "type": "custom-liquid",
+      "name": "Recently Viewed",
+      "settings": {
+        "custom_liquid": "<style>.recently-viewed-heading{font-size:1.25rem;margin:0 0 12px;color:#16241C}.recently-viewed-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}@media screen and (max-width:749px){.recently-viewed-grid{grid-template-columns:repeat(2,1fr)}}.recently-viewed-card{display:block;text-decoration:none;color:inherit}.recently-viewed-card__image{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;background:#FFF7E8}.recently-viewed-card__title{font-size:.85rem;margin:8px 0 2px;color:#16241C}.recently-viewed-card__price{font-size:.85rem;font-weight:600;margin:0;color:#A8472E}</style><script src=\"{{ 'recently-viewed.js' | asset_url }}\" type=\"module\"></script><recently-viewed-grid data-exclude-handle=\"{{ product.handle }}\" data-limit=\"4\"></recently-viewed-grid>",
+        "section_width": "page-width",
+        "padding-block-start": 24,
+        "padding-block-end": 48
+      }
     }
   },
   "order": [
     "main",
-    "bundle_promo",
-    "fbt",
-    "shoppable_videos",
     "reviews",
+    "recently_viewed_section",
     "product_recommendations_qggXJq"
   ]
 }

@@ -7,7 +7,7 @@
 <div class="card-buy-box" data-card-buy-box id="CardBuyBox-{{ card_id }}" data-variant-id="{{ variant.id }}" data-available="{{ variant.available }}">
   <div class="card-buy-box__action">
     <button type="button" class="button card-buy-box__add" data-add-to-cart {% unless variant.available %}disabled{% endunless %}>
-      {%- if variant.available -%}Buy Now{%- else -%}Sold Out{%- endif -%}
+      {%- if variant.available -%}Add to cart{%- else -%}Sold Out{%- endif -%}
     </button>
 
     <div class="card-buy-box__stepper" data-stepper aria-hidden="true" inert>

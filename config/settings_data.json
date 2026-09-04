@@ -9,10 +9,10 @@
  */
 {
   "current": {
-    "logo": "{{ shop.brand.logo }}",
+    "logo": "shopify://shop_images/wordmark.png",
     "logo_inverse": "shopify://shop_images/logo.jpg",
-    "logo_height": 50,
-    "logo_height_mobile": 28,
+    "logo_height": 60,
+    "logo_height_mobile": 36,
     "favicon": "shopify://shop_images/fav.jpg",
     "page_text_color": "{{ settings.color_palette.foreground }}",
     "type_body_font": "inter_n4",
@@ -108,6 +108,66 @@
     "variant_button_radius": 14,
     "variant_button_width": "equal-width-buttons",
     "content_for_index": [],
+    "blocks": {
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      },
+      "16510219240223340300": {
+        "type": "shopify://apps/whatmore-shoppable-videos/blocks/app-embed/20db8a72-315a-4364-8885-64219ee48303",
+        "disabled": false,
+        "settings": {
+          "minimized_video_position": "right",
+          "horizontal-padding": 5,
+          "vertical-padding": 150,
+          "app-size": 50,
+          "minimized_video_position_landscape": "right",
+          "horizontal-padding-landscape": 5,
+          "vertical-padding-landscape": 150,
+          "app-size-landscape": 50,
+          "video-title": "",
+          "use-variant": "false"
+        }
+      },
+      "11724500921838622758": {
+        "type": "shopify://apps/frequently-bought/blocks/app-embed-block/b1a8cbea-c844-4842-9529-7c62dbab1b1f",
+        "disabled": false,
+        "settings": {}
+      },
+      "15683396631634586217": {
+        "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
+        "disabled": false,
+        "settings": {
+          "greeting_message": "",
+          "show_featured_products": true,
+          "featured_products": [],
+          "background_color": "#fff7e8",
+          "font_color": "#183a2b",
+          "agent_invert_activator_colors": true,
+          "button_color": "#000000",
+          "button_icon": "chat_bubble",
+          "button_text": "chat_with_us",
+          "button_horizontal_position": "bottom_right",
+          "button_vertical_position": "lowest",
+          "agent_inherit_fonts": true,
+          "agent_font": "system_ui_n4",
+          "agent_font_size": 14,
+          "agent_activator_font_size": 14,
+          "agent_border_radius": 14
+        }
+      },
+      "23348512398354824": {
+        "type": "shopify://apps/wi-atc/blocks/wizz-atc-embed/dc8c508e-8349-4d4e-adb8-536f2f71bace",
+        "disabled": false,
+        "settings": {}
+      },
+      "9520728295060090532": {
+        "type": "shopify://apps/aris-bundles/blocks/avis-embed/86b9057c-ee79-45f6-9ee2-a8385ea44245",
+        "disabled": false,
+        "settings": {}
+      }
+    },
     "color_palette": {
       "background": "#FFF7E8",
       "foreground": "#183A2B",

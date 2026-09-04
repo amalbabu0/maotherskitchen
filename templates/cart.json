@@ -53,8 +53,37 @@
             "border_radius": 0
           },
           "blocks": {}
+        },
+        "cart_trust_badge": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>&#128274; 100% Secure Checkout &middot; Razorpay Verified &middot; Easy 7-Day Returns</p>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "paragraph",
+            "font": "var(--font-body--family)",
+            "font_size": "0.9rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 16,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         }
       },
+      "block_order": [
+        "cart_trust_badge"
+      ],
       "settings": {
         "section_width": "page-width",
         "background_color": "{{ settings.color_palette.background }}",

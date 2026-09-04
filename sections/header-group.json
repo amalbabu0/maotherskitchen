@@ -18,23 +18,268 @@
           "type": "_marquee",
           "settings": {
             "movement_direction": "normal",
-            "background_color": "#183A2B",
+            "background_color": "#183a2b",
             "transparent_background": false,
             "padding-block-start": 8,
             "padding-block-end": 8,
             "gap_between_elements": 24
           },
           "blocks": {
-            "t1": { "type": "text", "settings": { "text": "<p>20% OFF SALE</p>", "type_preset": "custom", "font_size": "0.8rem", "wrap": "nowrap", "width": "fit-content", "text_color": "#FFF7E8" } },
-            "i1": { "type": "icon", "settings": { "icon": "price_tag", "width": 16 } },
-            "t2": { "type": "text", "settings": { "text": "<p>20% OFF SALE</p>", "type_preset": "custom", "font_size": "0.8rem", "wrap": "nowrap", "width": "fit-content", "text_color": "#FFF7E8" } },
-            "i2": { "type": "icon", "settings": { "icon": "price_tag", "width": 16 } },
-            "t3": { "type": "text", "settings": { "text": "<p>20% OFF SALE</p>", "type_preset": "custom", "font_size": "0.8rem", "wrap": "nowrap", "width": "fit-content", "text_color": "#FFF7E8" } },
-            "i3": { "type": "icon", "settings": { "icon": "price_tag", "width": 16 } },
-            "t4": { "type": "text", "settings": { "text": "<p>20% OFF SALE</p>", "type_preset": "custom", "font_size": "0.8rem", "wrap": "nowrap", "width": "fit-content", "text_color": "#FFF7E8" } },
-            "i4": { "type": "icon", "settings": { "icon": "price_tag", "width": 16 } }
+            "t1": {
+              "type": "text",
+              "settings": {
+                "text": "<p>20% OFF SALE</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.8rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "nowrap",
+                "text_color": "#fff7e8",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "i1": {
+              "type": "icon",
+              "settings": {
+                "icon": "price_tag",
+                "width": 16,
+                "link": "",
+                "open_in_new_tab": false,
+                "icon_color": ""
+              },
+              "blocks": {}
+            },
+            "t2": {
+              "type": "text",
+              "settings": {
+                "text": "<p>20% OFF SALE</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.8rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "nowrap",
+                "text_color": "#fff7e8",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "i2": {
+              "type": "icon",
+              "settings": {
+                "icon": "price_tag",
+                "width": 16,
+                "link": "",
+                "open_in_new_tab": false,
+                "icon_color": ""
+              },
+              "blocks": {}
+            },
+            "t3": {
+              "type": "text",
+              "settings": {
+                "text": "<p>20% OFF SALE</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.8rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "nowrap",
+                "text_color": "#fff7e8",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "i3": {
+              "type": "icon",
+              "settings": {
+                "icon": "price_tag",
+                "width": 16,
+                "link": "",
+                "open_in_new_tab": false,
+                "icon_color": ""
+              },
+              "blocks": {}
+            },
+            "t4": {
+              "type": "text",
+              "settings": {
+                "text": "<p>20% OFF SALE</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.8rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "nowrap",
+                "text_color": "#fff7e8",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "i4": {
+              "type": "icon",
+              "settings": {
+                "icon": "price_tag",
+                "width": 16,
+                "link": "",
+                "open_in_new_tab": false,
+                "icon_color": ""
+              },
+              "blocks": {}
+            },
+            "t5": {
+              "type": "text",
+              "settings": {
+                "text": "<p>20% OFF SALE</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.8rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "nowrap",
+                "text_color": "#fff7e8",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "i5": {
+              "type": "icon",
+              "settings": {
+                "icon": "price_tag",
+                "width": 16,
+                "link": "",
+                "open_in_new_tab": false,
+                "icon_color": ""
+              },
+              "blocks": {}
+            },
+            "t6": {
+              "type": "text",
+              "settings": {
+                "text": "<p>20% OFF SALE</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.8rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "nowrap",
+                "text_color": "#fff7e8",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "i6": {
+              "type": "icon",
+              "settings": {
+                "icon": "price_tag",
+                "width": 16,
+                "link": "",
+                "open_in_new_tab": false,
+                "icon_color": ""
+              },
+              "blocks": {}
+            },
+            "t7": { "type": "text", "settings": { "text": "<p>20% OFF SALE</p>", "width": "fit-content", "max_width": "normal", "alignment": "left", "type_preset": "custom", "font": "var(--font-body--family)", "font_size": "0.8rem", "line_height": "normal", "letter_spacing": "normal", "case": "none", "wrap": "nowrap", "text_color": "#fff7e8", "background": false, "background_color": "#00000026", "corner_radius": 0, "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0 }, "blocks": {} },
+            "i7": { "type": "icon", "settings": { "icon": "price_tag", "width": 16, "link": "", "open_in_new_tab": false, "icon_color": "" }, "blocks": {} },
+            "t8": { "type": "text", "settings": { "text": "<p>20% OFF SALE</p>", "width": "fit-content", "max_width": "normal", "alignment": "left", "type_preset": "custom", "font": "var(--font-body--family)", "font_size": "0.8rem", "line_height": "normal", "letter_spacing": "normal", "case": "none", "wrap": "nowrap", "text_color": "#fff7e8", "background": false, "background_color": "#00000026", "corner_radius": 0, "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0 }, "blocks": {} },
+            "i8": { "type": "icon", "settings": { "icon": "price_tag", "width": 16, "link": "", "open_in_new_tab": false, "icon_color": "" }, "blocks": {} },
+            "t9": { "type": "text", "settings": { "text": "<p>20% OFF SALE</p>", "width": "fit-content", "max_width": "normal", "alignment": "left", "type_preset": "custom", "font": "var(--font-body--family)", "font_size": "0.8rem", "line_height": "normal", "letter_spacing": "normal", "case": "none", "wrap": "nowrap", "text_color": "#fff7e8", "background": false, "background_color": "#00000026", "corner_radius": 0, "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0 }, "blocks": {} },
+            "i9": { "type": "icon", "settings": { "icon": "price_tag", "width": 16, "link": "", "open_in_new_tab": false, "icon_color": "" }, "blocks": {} },
+            "t10": { "type": "text", "settings": { "text": "<p>20% OFF SALE</p>", "width": "fit-content", "max_width": "normal", "alignment": "left", "type_preset": "custom", "font": "var(--font-body--family)", "font_size": "0.8rem", "line_height": "normal", "letter_spacing": "normal", "case": "none", "wrap": "nowrap", "text_color": "#fff7e8", "background": false, "background_color": "#00000026", "corner_radius": 0, "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0 }, "blocks": {} },
+            "i10": { "type": "icon", "settings": { "icon": "price_tag", "width": 16, "link": "", "open_in_new_tab": false, "icon_color": "" }, "blocks": {} },
+            "t11": { "type": "text", "settings": { "text": "<p>20% OFF SALE</p>", "width": "fit-content", "max_width": "normal", "alignment": "left", "type_preset": "custom", "font": "var(--font-body--family)", "font_size": "0.8rem", "line_height": "normal", "letter_spacing": "normal", "case": "none", "wrap": "nowrap", "text_color": "#fff7e8", "background": false, "background_color": "#00000026", "corner_radius": 0, "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0 }, "blocks": {} },
+            "i11": { "type": "icon", "settings": { "icon": "price_tag", "width": 16, "link": "", "open_in_new_tab": false, "icon_color": "" }, "blocks": {} },
+            "t12": { "type": "text", "settings": { "text": "<p>20% OFF SALE</p>", "width": "fit-content", "max_width": "normal", "alignment": "left", "type_preset": "custom", "font": "var(--font-body--family)", "font_size": "0.8rem", "line_height": "normal", "letter_spacing": "normal", "case": "none", "wrap": "nowrap", "text_color": "#fff7e8", "background": false, "background_color": "#00000026", "corner_radius": 0, "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0 }, "blocks": {} },
+            "i12": { "type": "icon", "settings": { "icon": "price_tag", "width": 16, "link": "", "open_in_new_tab": false, "icon_color": "" }, "blocks": {} }
           },
-          "block_order": ["t1", "i1", "t2", "i2", "t3", "i3", "t4", "i4"]
+          "block_order": [
+            "t1",
+            "i1",
+            "t2",
+            "i2",
+            "t3",
+            "i3",
+            "t4",
+            "i4",
+            "t5",
+            "i5",
+            "t6",
+            "i6",
+            "t7",
+            "i7",
+            "t8",
+            "i8",
+            "t9",
+            "i9",
+            "t10",
+            "i10",
+            "t11",
+            "i11",
+            "t12",
+            "i12"
+          ]
         }
       },
       "block_order": [
@@ -44,8 +289,9 @@
       "settings": {
         "speed": 5,
         "section_width": "full-width",
-        "background_color": "#183A2B",
+        "background_color": "#183a2b",
         "divider_width": 0,
+        "divider_color": "",
         "padding-block-start": 0,
         "padding-block-end": 0
       }

@@ -67,7 +67,7 @@
             "links": {
               "type": "text",
               "settings": {
-                "text": "<p><a href=\"/pages/about\">About Us</a></p><p><a href=\"/pages/privacy-policy\">Privacy Policy</a></p><p><a href=\"/pages/terms-privacy\">Terms &amp; Conditions</a></p>",
+                "text": "<p><a href=\"/pages/about\">About Us</a></p><p><a href=\"/pages/privacy-policy\">Privacy Policy</a></p><p><a href=\"/pages/terms-privacy\">Terms &amp; Conditions</a></p><p><a href=\"/pages/shipping-policy\">Shipping Policy</a></p><p><a href=\"/pages/refund-policy\">Refund Policy</a></p>",
                 "width": "100%", "max_width": "normal", "alignment": "left", "type_preset": "rte",
                 "font": "var(--font-body--family)", "font_size": "1rem", "line_height": "normal", "letter_spacing": "normal", "case": "none", "wrap": "pretty",
                 "text_color": "", "background": false, "background_color": "#00000026", "corner_radius": 0,
@@ -131,7 +131,7 @@
             "links": {
               "type": "text",
               "settings": {
-                "text": "<p><a href=\"/\">Home</a></p><p><a href=\"/collections/all\">Shop All</a></p><p><a href=\"/search\">Search</a></p><p><a href=\"/pages/contact\">FAQs</a></p>",
+                "text": "<p><a href=\"/\">Home</a></p><p><a href=\"/collections/all\">Shop All</a></p><p><a href=\"/blogs/recipes\">Recipes</a></p><p><a href=\"/search\">Search</a></p><p><a href=\"/pages/faqs\">FAQs</a></p><p><a href=\"/pages/wishlist\">Wishlist</a></p>",
                 "width": "100%", "max_width": "normal", "alignment": "left", "type_preset": "rte",
                 "font": "var(--font-body--family)", "font_size": "1rem", "line_height": "normal", "letter_spacing": "normal", "case": "none", "wrap": "pretty",
                 "text_color": "", "background": false, "background_color": "#00000026", "corner_radius": 0,

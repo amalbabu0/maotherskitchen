@@ -68,6 +68,7 @@
 
   .marquee__content :is(p, h1, h2, h3, h4, h5, h6) {
     white-space: nowrap;
+    font-weight: 700;
   }
 
   .marquee__content .marquee__repeated-items * {
@@ -93,14 +94,28 @@
     min-height: max-content;
   }
 
+  /* Left-to-right seamless loop: track starts shifted left by exactly one
+     copy's width (+ half a gap) and animates back to 0, so content enters
+     from the left edge and exits to the right with no visible seam.
+     Fixed 28s duration: marquee.js's own IntersectionObserver-based speed
+     calculation is unreliable (has resolved to both empty and a literal
+     "0s" in testing, and var() fallback only catches the empty case) -
+     bypass it with a hardcoded duration rather than fight the minified JS. */
   marquee-component:not([data-disabled]) .marquee__wrapper {
-    animation: marquee-motion var(--marquee-speed, 18s) linear infinite var(--marquee-direction, normal);
+    animation: marquee-motion 28s linear infinite;
   }
 
   @keyframes marquee-motion {
-    to {
+    from {
       transform: translate3d(calc(-50% - (var(--marquee-gap) / 2)), 0, 0);
     }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    marquee-component { --marquee-gap: 96px !important; }
   }
 {% endstylesheet %}
 

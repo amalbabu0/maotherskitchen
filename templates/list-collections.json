@@ -6,162 +6,81 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
-    "collection_list_Wfgh3m": {
-      "type": "main-collection-list",
+    "collections_heading": {
+      "type": "section",
       "blocks": {
-        "group_4FtiAg": {
-          "type": "group",
-          "name": "t:names.header",
+        "text": {
+          "type": "text",
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "open_in_new_tab": false,
+            "text": "<h1>Collections</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
             "padding-block-start": 0,
-            "padding-block-end": 48,
+            "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
-          "blocks": {
-            "text_fRMQMR": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<h1>Collections</h1>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h2",
-                "font": "var(--font-body--family)",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 16,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_fRMQMR"
-          ]
-        },
-        "static-collection-card": {
-          "type": "_collection-card",
-          "name": "t:names.collection_card",
-          "static": true,
-          "settings": {
-            "placement": "below_image",
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-start",
-            "collection_card_gap": 8,
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0
-          },
-          "blocks": {
-            "collection_title_7YgBPU": {
-              "type": "collection-title",
-              "name": "t:names.collection_title",
-              "settings": {
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "collection-card-image": {
-              "type": "_collection-card-image",
-              "name": "t:names.collection_card_image",
-              "static": true,
-              "settings": {
-                "image_ratio": "square",
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "collection_title_7YgBPU"
-          ]
+          "blocks": {}
         }
       },
-      "block_order": [
-        "group_4FtiAg"
-      ],
-      "name": "t:names.collection_list",
+      "block_order": ["text"],
       "settings": {
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "columns": 3,
-        "mobile_columns": "2",
-        "columns_gap": 12,
-        "bento_gap": 8,
-        "rows_gap": 24,
-        "max_collections": 8,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
         "gap": 12,
-        "background_color": "{{ settings.color_palette.background }}",
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
         "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-end": 16
       }
+    },
+    "collection_bento_grid": {
+      "type": "collection-bento",
+      "settings": { "background_color": "" },
+      "blocks": {
+        "tile_1": { "type": "tile", "settings": { "collection": "spices-masala", "subtitle": "Stone-Ground Freshness" } },
+        "tile_2": { "type": "tile", "settings": { "collection": "sweets-halwa", "subtitle": "Traditional Recipes" } },
+        "tile_3": { "type": "tile", "settings": { "collection": "snacks", "subtitle": "Crunchy & Homemade" } },
+        "tile_4": { "type": "tile", "settings": { "collection": "pickles-condiments", "subtitle": "Tangy & Bold" } },
+        "tile_5": { "type": "tile", "settings": { "collection": "rice-grains", "subtitle": "Kerala Staples" } },
+        "tile_6": { "type": "tile", "settings": { "collection": "oils", "subtitle": "Cold-Pressed Purity" } }
+      },
+      "block_order": ["tile_1", "tile_2", "tile_3", "tile_4", "tile_5", "tile_6"]
     }
   },
-  "order": [
-    "collection_list_Wfgh3m"
-  ]
+  "order": ["collections_heading", "collection_bento_grid"]
 }

@@ -31,6 +31,19 @@
 
 {% render 'collection-wrapper-styles' %}
 
+{% stylesheet %}
+  /* Hover-only size change on product cards — no other style changes.
+     Scoped to .product-grid, which only renders on the collection and
+     search-results templates. */
+  .product-grid product-card {
+    display: block;
+    transition: transform 0.2s ease;
+  }
+  .product-grid > li:hover product-card {
+    transform: scale(1.04);
+  }
+{% endstylesheet %}
+
 <div
   class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
 ></div>

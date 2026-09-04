@@ -12,6 +12,68 @@
   class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
 ></div>
 
+{% stylesheet %}
+  /* Maximalist collections index — market-stall collage treatment.
+     Scoped to .section-resource-list, unique to this section (the
+     /collections index page), so it never touches the product grid. */
+  .section-resource-list .resource-list__item {
+    padding: 8px;
+    position: relative;
+  }
+  .section-resource-list .collection-card {
+    display: block;
+    border: 3px solid var(--color-foreground) !important;
+    border-radius: 20px !important;
+    box-shadow: 7px 7px 0 rgb(var(--color-foreground-rgb) / 0.9) !important;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .section-resource-list .resource-list__item:hover .collection-card {
+    transform: translateY(-6px);
+    box-shadow: 10px 10px 0 rgb(var(--color-foreground-rgb) / 0.9) !important;
+  }
+
+  .section-resource-list .collection-card__content {
+    background: var(--color-background);
+    padding: 14px 16px !important;
+  }
+  .section-resource-list .collection-card__content p {
+    font-weight: 800 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-size: 17px !important;
+  }
+
+  .section-resource-list .resource-list__item::after {
+    content: "Shop now →";
+    position: absolute;
+    z-index: 2;
+    top: 14px;
+    right: 14px;
+    background: #D99A2B;
+    color: var(--color-foreground);
+    border: 2px solid var(--color-foreground);
+    border-radius: 40px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    box-shadow: 3px 3px 0 rgb(var(--color-foreground-rgb) / 0.9);
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .section-resource-list .collection-card {
+      box-shadow: 5px 5px 0 rgb(var(--color-foreground-rgb) / 0.9) !important;
+      border-width: 2px !important;
+    }
+    .section-resource-list .resource-list__item::after {
+      font-size: 11px;
+      padding: 4px 11px;
+    }
+  }
+{% endstylesheet %}
+
 <div
   class="
     section

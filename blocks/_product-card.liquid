@@ -10,6 +10,9 @@
 
 {% capture children %}
   {% content_for 'blocks', closest.product: product %}
+  {%- if product != blank -%}
+    {% render 'wishlist-toggle', product: product, class: 'wishlist-toggle--card' %}
+  {%- endif -%}
 {% endcapture %}
 
 {% render 'product-card', children: children, product: product, product_view_context: product_view_context %}
@@ -82,6 +85,18 @@
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box;
+    position: relative;
+  }
+
+  /* Wishlist heart: overlaid on the card image's top-right corner. The
+     content wrapper's image (card-gallery) is the first, full-width child,
+     so anchoring to the content wrapper's own top-right lands the heart on
+     the image without needing to reach inside the gallery markup. */
+  .wishlist-toggle--card {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
   }
 
   /* Equal-width columns, immune to the grid-template-columns fight above */
@@ -126,6 +141,7 @@
     gap: 2px;
     min-width: 0;
     flex-shrink: 1;
+    margin-left: 2mm;
   }
   .card-footer-row product-price::before {
     content: "Price";
