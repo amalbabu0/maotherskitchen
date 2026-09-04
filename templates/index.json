@@ -1,0 +1,496 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_jVaWmY": {
+      "type": "hero",
+      "blocks": {
+        "text_YLPk4p": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<p>Browse our latest products</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "#ffffff",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "button_H9gpTf": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "Shop all",
+            "link": "shopify://collections/all",
+            "open_in_new_tab": false,
+            "style_class": "button-custom",
+            "custom_button_background": "rgba(0,0,0,0)",
+            "custom_button_text": "#ffffff",
+            "custom_button_border": "{{ settings.color_palette.background }}",
+            "link_text_color": "",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_YLPk4p",
+        "button_H9gpTf"
+      ],
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "image",
+        "image_1": "shopify://shop_images/bg.jpg",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "space-between",
+        "vertical_alignment": "flex-end",
+        "align_baseline": true,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "flex-end",
+        "gap": 24,
+        "section_width": "page-width",
+        "section_height": "medium",
+        "section_height_custom": 50,
+        "background_color": "rgba(0,0,0,0)",
+        "toggle_overlay": true,
+        "overlay_color": "#12121266",
+        "overlay_style": "solid",
+        "gradient_direction": "to bottom",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 100,
+        "padding-block-end": 72
+      }
+    },
+    "shipping_note": {
+      "type": "section",
+      "settings": {
+        "content_direction": "row",
+        "horizontal_alignment": "center",
+        "horizontal_alignment_flex_direction_column": "center",
+        "section_width": "page-width",
+        "background_media": "none",
+        "background_color": "#183A2B",
+        "border": "none",
+        "padding-block-start": 14,
+        "padding-block-end": 14
+      },
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Free Shipping on Orders Above ₹499 | COD Available</p>",
+            "width": "100%",
+            "alignment": "center",
+            "type_preset": "paragraph",
+            "text_color": "#FFF7E8"
+          }
+        }
+      },
+      "block_order": ["text"]
+    },
+    "product_list_fa6P9H": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_list_text_YFtzcL": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h3>{{ closest.collection.title }}</h3>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_list_button_MWeP9V": {
+              "type": "_product-list-button",
+              "name": "t:names.product_list_button",
+              "settings": {
+                "label": "View all",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_YFtzcL",
+            "product_list_button_MWeP9V"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "background_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 16,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_677WP3": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 16,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_YXxMTj": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.color3 }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_JQzVV4": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "text_color": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_677WP3",
+            "product_title_YXxMTj",
+            "price_JQzVV4"
+          ]
+        }
+      },
+      "name": "t:names.product_list",
+      "settings": {
+        "collection": "all",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 8,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 28,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+
+    "trust_bar": {
+      "type": "trust-bar",
+      "settings": { "background_color": "#FFF7E8" },
+      "blocks": {
+        "item_1": { "type": "item", "settings": { "icon": "leaf", "heading": "Authentic Products", "text": "Carefully selected quality products" } },
+        "item_2": { "type": "item", "settings": { "icon": "lock", "heading": "Secure Payments", "text": "Safe and trusted checkout" } },
+        "item_3": { "type": "item", "settings": { "icon": "check_box", "heading": "COD Available", "text": "Convenient payment options" } },
+        "item_4": { "type": "item", "settings": { "icon": "truck", "heading": "Fast Delivery", "text": "Reliable shipping and tracking" } }
+      },
+      "block_order": ["item_1", "item_2", "item_3", "item_4"]
+    },
+
+    "collection_tiles": {
+      "type": "collection-tiles-custom",
+      "settings": {
+        "background_color": ""
+      },
+      "blocks": {
+        "tile_1": { "type": "tile", "settings": { "collection": "spices-masala" } },
+        "tile_2": { "type": "tile", "settings": { "collection": "sweets-halwa" } },
+        "tile_3": { "type": "tile", "settings": { "collection": "snacks" } },
+        "tile_4": { "type": "tile", "settings": { "collection": "pickles-condiments" } },
+        "tile_5": { "type": "tile", "settings": { "collection": "rice-grains" } },
+        "tile_6": { "type": "tile", "settings": { "collection": "oils" } },
+        "tile_7": { "type": "tile", "settings": { "collection": "combo-gift-packs" } }
+      },
+      "block_order": ["tile_1", "tile_2", "tile_3", "tile_4", "tile_5", "tile_6", "tile_7"]
+    },
+
+    "bundle_promo": {
+      "type": "bundle-promo-banner",
+      "settings": { "background_color": "#183A2B" },
+      "blocks": {
+        "bundle_product_1": { "type": "product", "settings": { "product": "festive-sweets-gift-box" } },
+        "bundle_product_2": { "type": "product", "settings": { "product": "turmeric-powder-haldi-powder" } },
+        "bundle_product_3": { "type": "product", "settings": { "product": "garam-masala-powder" } }
+      },
+      "block_order": ["bundle_product_1", "bundle_product_2", "bundle_product_3"]
+    },
+
+    "shoppable_videos": {
+      "type": "shoppable-videos",
+      "settings": { "background_color": "#FFF7E8" },
+      "blocks": {
+        "video_1": { "type": "video", "settings": { "product": "banana-chips-kerala-style", "caption": "Crispy Banana Chips", "video_asset": "banana-chips-frying.mp4" } },
+        "video_2": { "type": "video", "settings": { "product": "black-halwa-authentic-kerala-halwa", "caption": "Kerala Black Halwa", "video_asset": "kerala-sweets-halwa.mp4" } },
+        "video_3": { "type": "video", "settings": { "product": "mango-pickle-achar", "caption": "Homestyle Mango Pickle", "video_asset": "mango-pickle-jar.mp4" } },
+        "video_4": { "type": "video", "settings": { "product": "pure-coconut-oil", "caption": "Cold-Pressed Coconut Oil", "video_asset": "coconut-oil-pouring.mp4" } }
+      },
+      "block_order": ["video_1", "video_2", "video_3", "video_4"]
+    },
+
+    "featured_product": {
+      "type": "featured-product-custom",
+      "settings": { "background_color": "#FFF7E8", "eyebrow": "Featured", "product": "festive-sweets-gift-box" }
+    },
+
+    "fbt": {
+      "type": "frequently-bought-together",
+      "settings": { "background_color": "#FFF7E8" },
+      "blocks": {
+        "fbt_product_1": { "type": "product", "settings": { "product": "turmeric-powder-haldi-powder" } },
+        "fbt_product_2": { "type": "product", "settings": { "product": "garam-masala-powder" } },
+        "fbt_product_3": { "type": "product", "settings": { "product": "matta-unda-rice-short-grain" } }
+      },
+      "block_order": ["fbt_product_1", "fbt_product_2", "fbt_product_3"]
+    },
+
+    "reviews": {
+      "type": "judge-me-reviews",
+      "settings": { "background_color": "#FFF7E8" },
+      "blocks": {
+        "testimonial_1": { "type": "testimonial", "settings": { "rating": 5, "quote": "Tastes exactly like my grandmother's cooking. The banana chips are so crispy and fresh.", "author": "Priya S.", "product_name": "Banana Chips" } },
+        "testimonial_2": { "type": "testimonial", "settings": { "rating": 5, "quote": "Ordered the halwa for Onam and it was a huge hit with the whole family. Will definitely order again.", "author": "Arun K.", "product_name": "Black Halwa" } },
+        "testimonial_3": { "type": "testimonial", "settings": { "rating": 4, "quote": "Good quality spices, packaging was neat and delivery was quick. COD made it easy to try.", "author": "Meera R.", "product_name": "Turmeric Powder" } }
+      },
+      "block_order": ["testimonial_1", "testimonial_2", "testimonial_3"]
+    },
+
+    "why_choose_us": {
+      "type": "section",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "space-between",
+        "vertical_alignment": "flex-start",
+        "gap": 16,
+        "section_width": "page-width",
+        "background_media": "none",
+        "background_color": "#183A2B",
+        "border": "none",
+        "padding-block-start": 56,
+        "padding-block-end": 56
+      },
+      "blocks": {
+        "col_1": {
+          "type": "group",
+          "settings": { "content_direction": "column", "horizontal_alignment_flex_direction_column": "flex-start", "gap": 8, "width": "fill", "height": "fit", "background_media": "none", "border": "none", "padding-block-start": 10, "padding-block-end": 0 },
+          "blocks": {
+            "heading": { "type": "text", "settings": { "text": "<h4>Authentic Quality</h4>", "width": "100%", "alignment": "center", "type_preset": "h4" } },
+            "text": { "type": "text", "settings": { "text": "<p>Products selected with care.</p>", "width": "100%", "alignment": "center", "type_preset": "rte" } }
+          },
+          "block_order": ["heading", "text"]
+        },
+        "col_2": {
+          "type": "group",
+          "settings": { "content_direction": "column", "horizontal_alignment_flex_direction_column": "flex-start", "gap": 8, "width": "fill", "height": "fit", "background_media": "none", "border": "none", "padding-block-start": 10, "padding-block-end": 0 },
+          "blocks": {
+            "heading": { "type": "text", "settings": { "text": "<h4>Made for Everyday Moments</h4>", "width": "100%", "alignment": "center", "type_preset": "h4" } },
+            "text": { "type": "text", "settings": { "text": "<p>Good food made simple.</p>", "width": "100%", "alignment": "center", "type_preset": "rte" } }
+          },
+          "block_order": ["heading", "text"]
+        },
+        "col_3": {
+          "type": "group",
+          "settings": { "content_direction": "column", "horizontal_alignment_flex_direction_column": "flex-start", "gap": 8, "width": "fill", "height": "fit", "background_media": "none", "border": "none", "padding-block-start": 10, "padding-block-end": 0 },
+          "blocks": {
+            "heading": { "type": "text", "settings": { "text": "<h4>Trusted Service</h4>", "width": "100%", "alignment": "center", "type_preset": "h4" } },
+            "text": { "type": "text", "settings": { "text": "<p>Secure ordering and reliable delivery.</p>", "width": "100%", "alignment": "center", "type_preset": "rte" } }
+          },
+          "block_order": ["heading", "text"]
+        },
+        "col_4": {
+          "type": "group",
+          "settings": { "content_direction": "column", "horizontal_alignment_flex_direction_column": "flex-start", "gap": 8, "width": "fill", "height": "fit", "background_media": "none", "border": "none", "padding-block-start": 10, "padding-block-end": 0 },
+          "blocks": {
+            "heading": { "type": "text", "settings": { "text": "<h4>Customer First</h4>", "width": "100%", "alignment": "center", "type_preset": "h4" } },
+            "text": { "type": "text", "settings": { "text": "<p>We're here whenever you need us.</p>", "width": "100%", "alignment": "center", "type_preset": "rte" } }
+          },
+          "block_order": ["heading", "text"]
+        }
+      },
+      "block_order": ["col_1", "col_2", "col_3", "col_4"]
+    },
+
+    "cta_banner": {
+      "type": "section",
+      "settings": {
+        "content_direction": "column",
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 16,
+        "section_width": "page-width",
+        "background_media": "none",
+        "background_color": "#D99A2B",
+        "border": "none",
+        "padding-block-start": 64,
+        "padding-block-end": 64
+      },
+      "blocks": {
+        "text": { "type": "text", "settings": { "text": "<h2>Taste Something Special Today</h2>", "width": "100%", "max_width": "narrow", "alignment": "center", "type_preset": "h2", "text_color": "#183A2B" } },
+        "subtext": { "type": "text", "settings": { "text": "<p>Explore our collection and discover your next favourite.</p>", "width": "100%", "max_width": "narrow", "alignment": "center", "type_preset": "rte", "text_color": "#183A2B" } },
+        "button": { "type": "button", "settings": { "label": "SHOP NOW", "link": "shopify://collections/all", "style_class": "button-custom", "custom_button_background": "#183A2B", "custom_button_text": "#FFF7E8", "custom_button_border": "#183A2B", "width": "fit-content" } }
+      },
+      "block_order": ["text", "subtext", "button"]
+    }
+  },
+  "order": [
+    "hero_jVaWmY",
+    "shipping_note",
+    "trust_bar",
+    "collection_tiles",
+    "product_list_fa6P9H",
+    "bundle_promo",
+    "shoppable_videos",
+    "featured_product",
+    "fbt",
+    "reviews",
+    "why_choose_us",
+    "cta_banner"
+  ]
+}

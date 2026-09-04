@@ -1,0 +1,38 @@
+<div class="benefit-pills">
+  {%- for i in (1..4) -%}
+    {%- capture pill_key -%}pill_{{ i }}{%- endcapture -%}
+    {%- assign pill = block.settings[pill_key] -%}
+    {%- if pill != blank -%}
+      <span class="benefit-pill">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 10.5L8 14.5L16 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        {{ pill }}
+      </span>
+    {%- endif -%}
+  {%- endfor -%}
+</div>
+
+<style>
+  .benefit-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .benefit-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.15);
+    font-size: 1.2rem;
+  }
+  .benefit-pill svg { width: 14px; height: 14px; flex-shrink: 0; }
+</style>
+
+{% schema %}
+{
+  "name": "Benefit pills",
+  "settings": [
+    { "type": "text", "id": "pill_1", "label": "Pill 1", "default": "No Preservatives" },
+    { "type": "text", "id": "pill_2", "label": "Pill 2", "default": "Traditional Recipe" },
+    { "type": "text", "id": "pill_3", "label": "Pill 3", "default": "Kerala Made" },
+    { "type": "text", "id": "pill_4", "label": "Pill 4", "default": "Small Batch" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,116 @@
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<div class="color-custom-{{ section.id }} shoppable-videos" id="ShoppableVideos-{{ section.id }}">
+  <div class="page-width">
+    <div class="shoppable-videos__title">
+      {%- if section.settings.heading != blank -%}<h2 class="shoppable-videos__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.subheading != blank -%}<p class="shoppable-videos__subheading">{{ section.settings.subheading }}</p>{%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="shoppable-videos__grid" role="list">
+        {%- for block in section.blocks -%}
+          {%- assign product = block.settings.product -%}
+          <li class="shoppable-videos__item" {{ block.shopify_attributes }}>
+            <a href="{{ product.url | default: '#' }}" class="shoppable-videos__link">
+              <div class="shoppable-videos__media">
+                {%- if block.settings.video != blank -%}
+                  {{ block.settings.video | video_tag: class: 'shoppable-videos__video', muted: true, loop: true, controls: false, autoplay: false, poster: block.settings.cover_image }}
+                {%- elsif block.settings.video_asset != blank -%}
+                  <video class="shoppable-videos__video" muted loop playsinline preload="metadata" src="{{ block.settings.video_asset | asset_url }}"></video>
+                {%- elsif block.settings.cover_image -%}
+                  {{ block.settings.cover_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.caption }}
+                {%- else -%}
+                  {{ 'lifestyle-1' | placeholder_svg_tag: 'shoppable-videos__placeholder' }}
+                {%- endif -%}
+                <span class="shoppable-videos__play" aria-hidden="true">&#9654;</span>
+              </div>
+              <div class="shoppable-videos__caption">
+                <p>{{ block.settings.caption | default: product.title }}</p>
+                {%- if product.price -%}<span class="shoppable-videos__price">{{ product.price | money }}</span>{%- endif -%}
+              </div>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      <p class="shoppable-videos__empty">Add video blocks in the theme editor. Once Whatmore is installed, enable its app embed (Theme settings → App embeds) for the live widget — this grid is the styled placeholder.</p>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    var videos = document.querySelectorAll('#ShoppableVideos-{{ section.id }} .shoppable-videos__video');
+    var isMobile = window.matchMedia('(max-width: 749px)').matches;
+
+    if (isMobile) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var video = entry.target;
+          if (entry.isIntersecting) {
+            video.play().catch(function () {});
+          } else {
+            video.pause();
+          }
+        });
+      }, { threshold: 0.5 });
+      videos.forEach(function (video) { observer.observe(video); });
+    } else {
+      videos.forEach(function (video) {
+        var item = video.closest('.shoppable-videos__item');
+        item.addEventListener('mouseenter', function () { video.play().catch(function () {}); });
+        item.addEventListener('mouseleave', function () { video.pause(); video.currentTime = 0; });
+      });
+    }
+  })();
+</script>
+
+{% stylesheet %}
+  .shoppable-videos { padding-block: 4rem; padding-inline: 2mm; }
+  .shoppable-videos__title { text-align: center; margin-bottom: 2.5rem; }
+  .shoppable-videos__heading { margin: 0 0 0.5rem; }
+  .shoppable-videos__subheading { opacity: 0.75; margin: 0; }
+  .shoppable-videos__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  @media screen and (min-width: 750px) { .shoppable-videos__grid { grid-template-columns: repeat(4, 1fr); } }
+  .shoppable-videos__link { text-decoration: none; color: inherit; display: block; }
+  .shoppable-videos__media { position: relative; aspect-ratio: 9/16; border-radius: 8px; overflow: hidden; background: rgba(0,0,0,0.05); }
+  .shoppable-videos__media img, .shoppable-videos__media video, .shoppable-videos__placeholder { width: 100%; height: 100%; object-fit: cover; }
+  .shoppable-videos__play { position: absolute; top: 0.75rem; right: 0.75rem; background: rgba(0,0,0,0.5); color: #fff; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .shoppable-videos__caption { padding-top: 0.6rem; text-align: center; }
+  .shoppable-videos__price { display: block; opacity: 0.75; font-size: 1.3rem; }
+  .shoppable-videos__empty { text-align: center; opacity: 0.6; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Shoppable videos",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    { "type": "color", "id": "background_color", "label": "Background color" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "See It. Love It. Shop It." },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Discover our products through real videos and instantly shop your favourites." }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Linked product" },
+        { "type": "video", "id": "video", "label": "Video (upload)" },
+        { "type": "text", "id": "video_asset", "label": "Video (theme asset filename, used if no upload set above)" },
+        { "type": "image_picker", "id": "cover_image", "label": "Cover image / poster" },
+        { "type": "text", "id": "caption", "label": "Caption" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Shoppable videos", "blocks": [{ "type": "video" }, { "type": "video" }, { "type": "video" }, { "type": "video" }] }
+  ]
+}
+{% endschema %}

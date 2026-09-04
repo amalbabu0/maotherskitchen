@@ -1,0 +1,335 @@
+
+
+{%- doc -%}
+  @param {string} [product_view_context] - Context value passed through to the card snippet.
+{%- enddoc -%}
+
+{% liquid
+  assign product = closest.product
+-%}
+
+{% capture children %}
+  {% content_for 'blocks', closest.product: product %}
+{% endcapture %}
+
+{% render 'product-card', children: children, product: product, product_view_context: product_view_context %}
+{% render 'quantity-selector-styles' %}
+{% render 'buy-buttons-styles' %}
+{% render 'gift-card-recipient-form-styles' %}
+{% render 'quick-add-styles' %}
+{% render 'quick-add-modal-styles' %}
+{% render 'swatch-styles' %}
+{% render 'variant-picker-styles' %}
+{% render 'product-badges-styles' %}
+
+{%- comment -%}
+  Inline (not {% stylesheet %}) on purpose: the bundled/subset stylesheet
+  pipeline was silently dropping these rules on some pages even after a
+  fresh compile. Inline <style> always loads regardless of that pipeline.
+  Harmless if it repeats once per card - browsers dedupe identical CSS cheaply.
+
+  The grid itself: a competing script kept recalculating unequal
+  grid-template-columns (content/intrinsic-image sized, not equal fractions)
+  even against inline !important + MutationObserver re-application. Sidestepping
+  it entirely: switch the container from CSS Grid to Flexbox. That script only
+  ever touches grid-template-columns, which has no effect on a flex container,
+  so its meddling becomes a no-op instead of something to keep fighting.
+{%- endcomment -%}
+<style>
+  /* Fixed 1:1 image container regardless of the source photo's own dimensions */
+  .card-gallery {
+    position: relative;
+    aspect-ratio: 1 / 1 !important;
+    width: 100%;
+    overflow: hidden;
+  }
+  .card-gallery .product-media-container {
+    height: 100%;
+    width: 100%;
+  }
+  .card-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* Reserve a consistent two-line title area; clamp longer titles with an ellipsis */
+  .product-card__content [class*="product_title"] p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3em;
+    min-height: 2.6em;
+  }
+
+  .product-card__content .compare-at-price {
+    display: none;
+  }
+
+  /* The real root cause of the unequal cards: <product-card> is itself a CSS
+     grid whose single content item (.product-card__content) was sizing to its
+     own intrinsic/content width instead of filling its 100%-equal parent <li>.
+     This is one level deeper than the outer .product-grid fix above - force it. */
+  product-card {
+    display: block !important;
+    width: 100% !important;
+  }
+  .product-card__content {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* Equal-width columns, immune to the grid-template-columns fight above */
+  .product-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    overflow-x: hidden;
+  }
+  .product-grid > li {
+    /* Subtract slightly more than the exact half-gap - browser subpixel
+       rounding on the exact value can round up just enough to overflow
+       and bump the last column to a new row. With a 16px grid gap the
+       exact half-gap is 8px, which leaves zero rounding margin - bump
+       to 9px so real-device subpixel rendering has slack. */
+    flex: 0 0 calc(50% - 9px);
+    max-width: calc(50% - 9px);
+    box-sizing: border-box;
+  }
+  @media screen and (min-width: 750px) {
+    .product-grid > li {
+      flex: 0 0 calc(25% - 13px);
+      max-width: calc(25% - 13px);
+    }
+  }
+
+  /* Footer row (Price label + amount on the left, Buy Now/stepper on the
+     right) was overlapping on narrow cards - these rules lived only in the
+     other file's bundled stylesheet block, which was being dropped on some
+     pages (same issue documented above). Duplicated here in the inline
+     style that's proven to always load. */
+  .card-footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding-top: 8px;
+  }
+  .card-footer-row product-price {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+  .card-footer-row product-price::before {
+    content: "Price";
+    font-size: 12px;
+    color: rgb(var(--color-foreground-rgb) / 0.55);
+    font-weight: 500;
+    order: -1;
+  }
+  .card-footer-row product-price [class*="price-item"] {
+    white-space: nowrap;
+  }
+  @media screen and (max-width: 480px) {
+    .card-footer-row {
+      gap: 6px;
+    }
+    .card-footer-row product-price {
+      font-size: 12px;
+    }
+    .card-footer-row product-price::before {
+      font-size: 10px;
+    }
+    .card-buy-box__add {
+      padding: 9px 14px !important;
+      font-size: 11px !important;
+    }
+    .card-buy-box__stepper {
+      min-width: 84px !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "t:names.product_card",
+  "blocks": [
+    {
+      "type": "_product-card-group"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "buy-buttons"
+    },
+    {
+      "type": "price"
+    },
+    {
+      "type": "review"
+    },
+    {
+      "type": "sku"
+    },
+    {
+      "type": "swatches"
+    },
+    {
+      "type": "_product-card-gallery"
+    },
+    {
+      "type": "product-title"
+    },
+    {
+      "type": "custom-liquid"
+    },
+    {
+      "type": "_card-buy-box"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:content.resource_reference_product_card"
+    },
+    {
+      "type": "range",
+      "id": "product_card_gap",
+      "label": "t:settings.vertical_gap",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "solid",
+          "label": "t:options.solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 1,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.opacity",
+      "default": 100,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:settings.color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "t:settings.border_radius",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}

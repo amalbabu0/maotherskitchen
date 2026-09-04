@@ -1,0 +1,84 @@
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<div class="color-custom-{{ section.id }} bundle-promo-banner">
+  <div class="page-width bundle-promo-banner__inner">
+    <div class="bundle-promo-banner__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="bundle-promo-banner__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="bundle-promo-banner__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="bundle-promo-banner__text">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link | default: '#' }}" class="button">
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="bundle-promo-banner__products">
+        {%- for block in section.blocks -%}
+          {%- assign product = block.settings.product -%}
+          <a href="{{ product.url | default: '#' }}" class="bundle-promo-banner__product-card" {{ block.shopify_attributes }}>
+            {%- if product.featured_image -%}
+              {{ product.featured_image | image_url: width: 400 | image_tag: loading: 'lazy', alt: product.title }}
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag: 'bundle-promo-banner__placeholder' }}
+            {%- endif -%}
+            <span class="bundle-promo-banner__product-title">{{ product.title | default: 'Select a product' }}</span>
+          </a>
+          {%- unless forloop.last -%}<span class="bundle-promo-banner__plus" aria-hidden="true">+</span>{%- endunless -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .bundle-promo-banner__inner {
+    padding-block: 60px;
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  @media screen and (min-width: 750px) {
+    .bundle-promo-banner__inner { grid-template-columns: 1fr 1fr; }
+  }
+  .bundle-promo-banner__eyebrow { letter-spacing: 0.1em; text-transform: uppercase; font-size: 1.3rem; opacity: 0.85; margin: 0 0 0.5rem; }
+  .bundle-promo-banner__heading { margin: 0 0 1rem; }
+  .bundle-promo-banner__products { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .bundle-promo-banner__product-card { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; text-decoration: none; color: inherit; width: 120px; }
+  .bundle-promo-banner__product-card img, .bundle-promo-banner__placeholder { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; }
+  .bundle-promo-banner__product-title { font-size: 1.3rem; text-align: center; }
+  .bundle-promo-banner__plus { font-size: 2rem; opacity: 0.6; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bundle promo banner",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    { "type": "color", "id": "background_color", "label": "Background color", "default": "#183A2B" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "COMPLETE YOUR FAVOURITES" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Save More With Our Combo Offers" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Combine your favourite products and enjoy special bundle pricing.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Combos" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "blocks": [
+    { "type": "product", "name": "Product", "settings": [{ "type": "product", "id": "product", "label": "Product" }] }
+  ],
+  "presets": [
+    { "name": "Bundle promo banner", "blocks": [{ "type": "product" }, { "type": "product" }, { "type": "product" }] }
+  ]
+}
+{% endschema %}

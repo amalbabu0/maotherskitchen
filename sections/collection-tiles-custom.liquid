@@ -1,0 +1,62 @@
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<div class="color-custom-{{ section.id }} collection-tiles-custom">
+  <div class="page-width">
+    <ul class="collection-tiles-custom__grid" role="list">
+      {%- for block in section.blocks -%}
+        {%- assign collection = block.settings.collection -%}
+        {%- if collection != blank -%}
+          <li class="collection-tiles-custom__item" {{ block.shopify_attributes }}>
+            <a href="{{ collection.url }}" class="collection-tiles-custom__link">
+              <div class="collection-tiles-custom__media">
+                {%- if collection.image -%}
+                  {{ collection.image | image_url: width: 500 | image_tag: loading: 'lazy', alt: collection.title }}
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'collection-tiles-custom__placeholder' }}
+                {%- endif -%}
+              </div>
+              <p class="collection-tiles-custom__title">{{ collection.title }}</p>
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% stylesheet %}
+  .collection-tiles-custom { padding-block: 2rem; }
+  .collection-tiles-custom__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  @media screen and (max-width: 749px) { .collection-tiles-custom__grid { grid-template-columns: repeat(2, 1fr); } }
+  .collection-tiles-custom__link { text-decoration: none; color: inherit; display: block; }
+  .collection-tiles-custom__media { aspect-ratio: 1/1; border-radius: 8px; overflow: hidden; background: rgba(0,0,0,0.05); }
+  .collection-tiles-custom__media img, .collection-tiles-custom__placeholder { width: 100%; height: 100%; object-fit: cover; }
+  .collection-tiles-custom__title { margin: 0.6rem 0 0; text-align: center; font-size: 1.4rem; font-weight: 600; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Collection tiles",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    { "type": "color", "id": "background_color", "label": "Background color" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Collection tile",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Collection tiles", "blocks": [{ "type": "tile" }, { "type": "tile" }, { "type": "tile" }] }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,18 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "13ac1a6ae1ad4226a5c9c03a2a509a14"
+name = "support"
+application_url = "https://motherskitchen0.myshopify.com/"
+embedded = true
+
+[webhooks]
+api_version = "2026-07"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "read_all_orders,read_analytics,read_assigned_fulfillment_orders,write_assigned_fulfillment_orders,read_customer_events,read_customers,write_customers,read_price_rules,write_price_rules,read_discounts,write_discounts,write_draft_orders,read_draft_orders,read_files,write_files,read_fulfillments,write_fulfillments,write_inventory,read_inventory,read_locations,write_marketing_events,read_marketing_events,read_merchant_managed_fulfillment_orders,write_merchant_managed_fulfillment_orders,read_metaobjects,write_metaobjects,read_online_store_navigation,write_online_store_navigation,read_online_store_pages,write_online_store_pages,read_orders,write_orders,read_product_listings,write_product_listings,read_products,write_products,read_publications,write_publications,write_reports,read_reports,read_script_tags,write_script_tags,read_shipping,write_shipping,read_shopify_payments_payouts,read_shopify_payments_disputes,read_content,write_content,read_themes,write_themes,read_translations,write_translations"
+optional_scopes = [ ]
+use_legacy_install_flow = true
+
+[auth]
+redirect_urls = [ "https://motherskitchen0.myshopify.com/admin" ]

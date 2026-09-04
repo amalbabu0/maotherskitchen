@@ -1,0 +1,328 @@
+{%- liquid
+  assign product = closest.product
+  assign variant = product.selected_or_first_available_variant
+  assign card_id = block.id | append: '-' | append: product.id
+-%}
+
+<div class="card-buy-box" data-card-buy-box id="CardBuyBox-{{ card_id }}" data-variant-id="{{ variant.id }}" data-available="{{ variant.available }}">
+  <div class="card-buy-box__action">
+    <button type="button" class="button card-buy-box__add" data-add-to-cart {% unless variant.available %}disabled{% endunless %}>
+      {%- if variant.available -%}Buy Now{%- else -%}Sold Out{%- endif -%}
+    </button>
+
+    <div class="card-buy-box__stepper" data-stepper aria-hidden="true" inert>
+      <button type="button" class="card-buy-box__stepper-btn" data-qty-decrease aria-label="Decrease quantity" tabindex="-1">&#8722;</button>
+      <span class="card-buy-box__stepper-qty" data-qty-value>1</span>
+      <button type="button" class="card-buy-box__stepper-btn" data-qty-increase aria-label="Increase quantity" tabindex="-1">+</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('CardBuyBox-{{ card_id }}');
+    if (!root || root.dataset.wired === 'true') return;
+    root.dataset.wired = 'true';
+
+    var variantId = root.dataset.variantId;
+    var action = root.querySelector('.card-buy-box__action');
+    var addButton = root.querySelector('[data-add-to-cart]');
+    var stepper = root.querySelector('[data-stepper]');
+    var qtyValue = root.querySelector('[data-qty-value]');
+    var decreaseButton = root.querySelector('[data-qty-decrease]');
+    var increaseButton = root.querySelector('[data-qty-increase]');
+    var busy = false;
+
+    // --- One-time layout restructure to match the reference card design ---
+    // Native markup renders: gallery(+badge inside) -> title -> price -> [this buy-box].
+    // Target layout: gallery(+badge, top-left overlay) -> title -> footer-row(price | buy-box).
+    (function restructureCard() {
+      var content = root.closest('.product-card__content');
+      if (!content || content.dataset.restructured === 'true') return;
+      content.dataset.restructured = 'true';
+
+      var price = content.querySelector('product-price');
+      if (price) {
+        var footer = document.createElement('div');
+        footer.className = 'card-footer-row';
+        price.insertAdjacentElement('beforebegin', footer);
+        footer.appendChild(price);
+        footer.appendChild(root);
+      }
+    })();
+
+    function dispatchCartUpdate(cart) {
+      var event = new CustomEvent('shopify:cart:lines-update', { bubbles: true });
+      event.promise = Promise.resolve({ cart: cart, detail: { itemCount: cart.item_count } });
+      document.dispatchEvent(event);
+    }
+
+    function setInteractive(el, isInteractive) {
+      if (isInteractive) {
+        el.removeAttribute('inert');
+        el.setAttribute('aria-hidden', 'false');
+        el.querySelectorAll('[tabindex="-1"]').forEach(function (btn) { btn.removeAttribute('tabindex'); });
+      } else {
+        el.setAttribute('inert', '');
+        el.setAttribute('aria-hidden', 'true');
+      }
+    }
+
+    function showStepper(qty) {
+      qtyValue.textContent = qty;
+      action.classList.add('is-in-cart');
+      setInteractive(stepper, true);
+      setInteractive(addButton, false);
+      addButton.setAttribute('tabindex', '-1');
+    }
+
+    function showAddButton() {
+      action.classList.remove('is-in-cart');
+      setInteractive(stepper, false);
+      addButton.removeAttribute('tabindex');
+    }
+
+    function currentLineQty() {
+      return parseInt(qtyValue.textContent || '0', 10);
+    }
+
+    function addToCart() {
+      if (busy || !variantId) return;
+      busy = true;
+      action.classList.add('is-loading');
+      fetch('{{ routes.cart_add_url }}', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ items: [{ id: parseInt(variantId, 10), quantity: 1 }] })
+      })
+        .then(function (res) { return res.json(); })
+        .then(function () { return fetch('{{ routes.cart_url }}.js').then(function (r) { return r.json(); }); })
+        .then(function (cart) {
+          showStepper(1);
+          dispatchCartUpdate(cart);
+        })
+        .catch(function (err) { console.warn('[card-buy-box] add failed', err); })
+        .finally(function () {
+          busy = false;
+          action.classList.remove('is-loading');
+        });
+    }
+
+    function changeQuantity(newQty) {
+      if (busy || !variantId) return;
+      busy = true;
+      fetch('{{ routes.cart_change_url }}', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ id: variantId, quantity: newQty })
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (cart) {
+          if (newQty <= 0) {
+            showAddButton();
+          } else {
+            qtyValue.textContent = newQty;
+          }
+          dispatchCartUpdate(cart);
+        })
+        .catch(function (err) { console.warn('[card-buy-box] change failed', err); })
+        .finally(function () { busy = false; });
+    }
+
+    addButton.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      addToCart();
+    });
+    increaseButton.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      changeQuantity(currentLineQty() + 1);
+    });
+    decreaseButton.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      changeQuantity(currentLineQty() - 1);
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  /* Outer card */
+  .product-card__content {
+    background: var(--color-background, #fff);
+    border-radius: 20px;
+    padding: 12px;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.06);
+  }
+
+  /* Product grid columns were sizing to each item's intrinsic content width
+     (max-content), not equal fractions - making some cards wider/taller than
+     others depending on each photo's original pixel dimensions. Force equal tracks. */
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  @media screen and (min-width: 750px) {
+    .product-grid {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+  }
+
+  /* Image box */
+  .card-gallery {
+    background-color: rgb(var(--color-foreground-rgb) / 0.04);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  /* Sale badge - stays on the image, top-left, restyled as a mint pill */
+  .card-gallery .product-badges__badge {
+    background-color: #e3f9f0 !important;
+    color: #12715b !important;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 14px;
+  }
+
+  /* Truncate the title to one line so every card's price/button row lines up,
+     regardless of how long the product name is. */
+  .product-card__content [class*="product_title"] p {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Footer row: price on the left, buy box (pill button / stepper) on the right.
+     Always side by side, on every viewport - sizes shrink on narrow cards instead of stacking. */
+  .card-footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding-top: 8px;
+  }
+  .card-footer-row product-price {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+  .card-footer-row product-price::before {
+    content: "Price";
+    font-size: 12px;
+    color: rgb(var(--color-foreground-rgb) / 0.55);
+    font-weight: 500;
+    order: -1;
+  }
+  .card-footer-row product-price [class*="price-item"] {
+    white-space: nowrap;
+  }
+  .card-footer-row product-price .compare-at-price {
+    display: none;
+  }
+
+  @media screen and (max-width: 480px) {
+    .card-footer-row {
+      gap: 6px;
+    }
+    .card-footer-row product-price {
+      font-size: 12px;
+    }
+    .card-footer-row product-price::before {
+      font-size: 10px;
+    }
+    .card-buy-box__add {
+      padding: 9px 14px;
+      font-size: 11px;
+    }
+    .card-buy-box__stepper {
+      min-width: 84px;
+      height: 34px;
+    }
+    .card-buy-box__stepper-btn {
+      width: 26px;
+      height: 26px;
+      font-size: 0.9rem;
+    }
+  }
+
+  .card-buy-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .card-buy-box__action {
+    display: grid;
+  }
+  .card-buy-box__action.is-loading {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  .card-buy-box__add,
+  .card-buy-box__stepper {
+    grid-area: 1 / 1;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+  }
+  .card-buy-box__add {
+    white-space: nowrap;
+    opacity: 1;
+    transform: scale(1);
+    background-color: #1c1c1e;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 24px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .card-buy-box__add:hover { background-color: #333336; }
+  .card-buy-box__action.is-in-cart .card-buy-box__add {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  .card-buy-box__stepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #1c1c1e;
+    border-radius: 24px;
+    height: 40px;
+    min-width: 110px;
+    padding-inline: 4px;
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  .card-buy-box__action.is-in-cart .card-buy-box__stepper {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .card-buy-box__stepper-btn {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    font-size: 1.05rem;
+    cursor: pointer;
+    color: inherit;
+    border-radius: 50%;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+  }
+  .card-buy-box__stepper-btn:hover { background: rgb(0 0 0 / 0.06); }
+  .card-buy-box__stepper-btn:active { transform: scale(0.88); }
+  .card-buy-box__stepper-qty {
+    font-weight: 600;
+    min-width: 1.5ch;
+    text-align: center;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Card buy box",
+  "tag": null
+}
+{% endschema %}

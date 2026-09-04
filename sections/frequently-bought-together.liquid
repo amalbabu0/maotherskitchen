@@ -1,0 +1,133 @@
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<div class="color-custom-{{ section.id }} fbt" id="FBT-{{ section.id }}">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}<h2 class="fbt__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.subheading != blank -%}<p class="fbt__subheading">{{ section.settings.subheading }}</p>{%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="fbt__row">
+        {%- for block in section.blocks -%}
+          {%- assign product = block.settings.product -%}
+          {%- assign variant = product.selected_or_first_available_variant -%}
+          {%- unless forloop.first -%}<span class="fbt__plus" aria-hidden="true">+</span>{%- endunless -%}
+          <div class="fbt__product" {{ block.shopify_attributes }}>
+            <label class="fbt__checkbox-wrap">
+              <input type="checkbox" class="fbt__checkbox" checked data-variant-id="{{ variant.id }}" data-price="{{ variant.price }}">
+              {%- if product.featured_image -%}
+                {{ product.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: product.title }}
+              {%- endif -%}
+              <span class="fbt__product-title">{{ product.title | default: 'Select a product' }}</span>
+              <span class="fbt__product-price">{{ variant.price | money }}</span>
+            </label>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="fbt__footer">
+        <p class="fbt__total">Total: <span class="fbt__total-price">{{ 0 | money }}</span></p>
+        <button type="button" class="button fbt__add-button">Add Selected to Cart</button>
+        <p class="fbt__status" role="status" hidden></p>
+      </div>
+    {%- else -%}
+      <p class="fbt__empty">Add product blocks in the theme editor. Swap this section out if the Frequently Bought Together app ships its own app block.</p>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('FBT-{{ section.id }}');
+    if (!root) return;
+    var checkboxes = root.querySelectorAll('.fbt__checkbox');
+    var totalEl = root.querySelector('.fbt__total-price');
+    var addButton = root.querySelector('.fbt__add-button');
+    var statusEl = root.querySelector('.fbt__status');
+
+    function formatMoney(cents) {
+      return (cents / 100).toLocaleString(document.documentElement.lang || 'en-IN', {
+        style: 'currency',
+        currency: '{{ cart.currency.iso_code | default: shop.currency }}'
+      });
+    }
+    function updateTotal() {
+      var total = 0;
+      checkboxes.forEach(function (cb) { if (cb.checked) total += parseFloat(cb.dataset.price || 0); });
+      if (totalEl) totalEl.textContent = formatMoney(total);
+    }
+    checkboxes.forEach(function (cb) { cb.addEventListener('change', updateTotal); });
+    updateTotal();
+
+    if (addButton) {
+      addButton.addEventListener('click', function () {
+        var items = [];
+        checkboxes.forEach(function (cb) {
+          if (cb.checked && cb.dataset.variantId) items.push({ id: parseInt(cb.dataset.variantId, 10), quantity: 1 });
+        });
+        if (items.length === 0) return;
+        addButton.disabled = true;
+        statusEl.hidden = true;
+        fetch('{{ routes.cart_add_url }}', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ items: items })
+        })
+          .then(function (res) { return res.json(); })
+          .then(function () {
+            statusEl.textContent = 'Added to cart.';
+            statusEl.hidden = false;
+            var event = new CustomEvent('shopify:cart:lines-update', { bubbles: true });
+            event.promise = fetch('{{ routes.cart_url }}.js').then(function (r) { return r.json(); }).then(function (cart) {
+              return { cart: cart, detail: { itemCount: cart.item_count } };
+            });
+            document.dispatchEvent(event);
+          })
+          .catch(function () {
+            statusEl.textContent = 'Something went wrong. Please try again.';
+            statusEl.hidden = false;
+          })
+          .finally(function () { addButton.disabled = false; });
+      });
+    }
+  })();
+</script>
+
+{% stylesheet %}
+  .fbt { padding-block: 4rem; text-align: center; }
+  .fbt__heading { margin: 0 0 0.5rem; }
+  .fbt__subheading { opacity: 0.75; margin: 0 0 2rem; }
+  .fbt__row { display: flex; align-items: flex-start; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .fbt__plus { font-size: 1.6rem; opacity: 0.5; align-self: center; }
+  .fbt__product { width: 150px; }
+  .fbt__checkbox-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; cursor: pointer; }
+  .fbt__checkbox { align-self: flex-start; }
+  .fbt__checkbox-wrap img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; }
+  .fbt__product-title { font-size: 1.3rem; }
+  .fbt__product-price { opacity: 0.75; font-size: 1.2rem; }
+  .fbt__footer { margin-top: 2rem; display: flex; flex-direction: column; align-items: center; }
+  .fbt__total { font-size: 1.6rem; margin: 0 0 1rem; }
+  .fbt__status { margin-top: 0.75rem; opacity: 0.8; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Frequently Bought",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    { "type": "color", "id": "background_color", "label": "Background color" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Bought Together" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Complete your order with these customer favourites." }
+  ],
+  "blocks": [
+    { "type": "product", "name": "Product", "settings": [{ "type": "product", "id": "product", "label": "Product" }] }
+  ],
+  "presets": [
+    { "name": "Frequently Bought", "blocks": [{ "type": "product" }, { "type": "product" }, { "type": "product" }] }
+  ]
+}
+{% endschema %}
