@@ -1090,6 +1090,65 @@
         "padding-block-end": 56
       }
     },
+    "featured_blog": {
+      "type": "featured-blog-posts",
+      "blocks": {
+        "static-blog-title": {
+          "type": "_featured-blog-posts-title",
+          "static": true,
+          "settings": {
+            "text": "<h3>From Our Kitchen</h3>",
+            "type_preset": "rte"
+          }
+        },
+        "static-blog-post-card": {
+          "type": "_featured-blog-posts-card",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "title": {
+              "type": "_heading",
+              "static": true,
+              "settings": {
+                "text": "<h4>{{ closest.article.title }}</h4>",
+                "show_alignment": false
+              }
+            },
+            "blog-post-info-text": {
+              "type": "_blog-post-info-text",
+              "static": true,
+              "settings": {
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "show_alignment": false
+              }
+            },
+            "blog-post-description": {
+              "type": "_blog-post-description",
+              "static": true,
+              "settings": {
+                "padding-block-start": 8,
+                "padding-block-end": 0
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "blog": "recipes",
+        "layout_type": "carousel",
+        "post_limit": 6,
+        "columns": 3,
+        "columns_gap": 8,
+        "mobile_card_size": "80cqw",
+        "icons_style": "arrow",
+        "icons_shape": "circle",
+        "gap": 12,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 56,
+        "padding-block-end": 56
+      }
+    },
     "cta_banner": {
       "type": "section",
       "blocks": {
@@ -1208,6 +1267,7 @@
     "featured_product",
     "reviews",
     "why_choose_us",
+    "featured_blog",
     "cta_banner"
   ]
 }

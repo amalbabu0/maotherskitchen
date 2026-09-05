@@ -24,6 +24,85 @@
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-palette' -%}
 
+    <style>
+      main[data-template="collection"],
+      main[data-template="list-collections"],
+      main[data-template="cart"],
+      main[data-template="search"],
+      main[data-template="404"],
+      main[data-template="blog"],
+      main[data-template="article"],
+      #header-component:not([transparent]),
+      #header-component[data-sticky-state="active"],
+      footer {
+        background-image: url({{ 'site-background.png' | asset_url }});
+        background-repeat: repeat;
+        background-size: 620px;
+      }
+      #header-component:not([transparent]) .header__underlay,
+      #header-component[data-sticky-state="active"] .header__underlay,
+      footer .section-background {
+        background-color: color-mix(in srgb, var(--color-background) 45%, transparent) !important;
+      }
+      main[data-template="collection"] .section-background,
+      main[data-template="collection"] .main-collection-grid,
+      main[data-template="list-collections"] .section-background,
+      main[data-template="cart"] .section-background,
+      main[data-template="search"] .section-background,
+      main[data-template="search"] .main-collection-grid,
+      main[data-template="404"] .section-background,
+      main[data-template="blog"] .section-background,
+      main[data-template="blog"] .blog-post-item,
+      main[data-template="article"] .section-background {
+        background-color: color-mix(in srgb, var(--color-background) 45%, transparent) !important;
+      }
+      main[data-template="collection"] .product-card__content,
+      main[data-template="search"] .product-card__content {
+        background-color: color-mix(in srgb, var(--color-background) 60%, transparent) !important;
+      }
+      @media screen and (min-width: 990px) {
+        main[data-template="article"] .image-block {
+          max-width: 936px;
+          margin-inline: auto;
+        }
+      }
+      main[data-template="index"] [id*="trust_bar"] .trust-bar,
+      main[data-template="index"] [id*="product_list"] .section-background,
+      main[data-template="index"] [id*="17885122455f935fcd"] .section-background,
+      main[data-template="index"] [id*="reviews"] .judgeme-reviews,
+      main[data-template="index"] [id*="featured_blog"] .section-background,
+      main[data-template="index"] [id*="featured_product"] .featured-product-custom,
+      main[data-template="index"] .collection-bento {
+        background-image:
+          linear-gradient(color-mix(in srgb, var(--color-background) 55%, transparent), color-mix(in srgb, var(--color-background) 55%, transparent)),
+          url({{ 'site-background.png' | asset_url }}) !important;
+        background-repeat: no-repeat, repeat !important;
+        background-size: cover, 620px !important;
+      }
+    </style>
+
+    {%- assign bg_image_policy_pages = 'privacy-policy,terms-privacy,shipping-policy,refund-policy,about,contact,wishlist,faqs' | split: ',' -%}
+    {%- if template == 'page' and bg_image_policy_pages contains page.handle -%}
+      <style>
+        main[data-template="page"] {
+          background-image: url({{ 'site-background.png' | asset_url }});
+          background-repeat: repeat;
+          background-size: 620px;
+        }
+        main[data-template="page"] .section-background {
+          background-color: color-mix(in srgb, var(--color-background) 45%, transparent) !important;
+        }
+        main[data-template="page"] .contact-form-box,
+        main[data-template="page"] .contact-card {
+          background-color: color-mix(in srgb, white 60%, transparent) !important;
+        }
+        main[data-template="page"] #fs-message {
+          height: 4rem;
+          resize: none;
+        }
+      </style>
+    {%- endif -%}
+
     {% if request.design_mode %}
       {%- render 'theme-editor' -%}
     {% endif %}
