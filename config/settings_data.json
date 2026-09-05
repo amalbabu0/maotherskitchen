@@ -171,9 +171,9 @@
     "color_palette": {
       "background": "#FFF7E8",
       "foreground": "#183A2B",
-      "color1": "#183A2B",
-      "color2": "#D99A2B",
-      "color3": "#183A2B"
+      "color1": "#D99A2B",
+      "color2": "#183A2B",
+      "color3": "#D99A2B"
     }
   },
   "presets": {

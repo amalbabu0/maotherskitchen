@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "main": {
       "type": "product-information",
@@ -38,6 +39,7 @@
             "media_columns": "two",
             "image_gap": 4,
             "large_first_image": false,
+            "icons_style": "arrow",
             "slideshow_controls_style": "counter",
             "slideshow_mobile_controls_style": "dots",
             "thumbnail_position": "right",
@@ -116,6 +118,7 @@
                 "border_opacity": 100,
                 "border_color": "",
                 "border_radius": 0,
+                "link": "",
                 "open_in_new_tab": false,
                 "placeholder": "",
                 "padding-block-start": 0,
@@ -178,9 +181,36 @@
                 "price_tVjtKg"
               ]
             },
+            "unify_app_cta_styles": {
+              "type": "custom-liquid",
+              "settings": {
+                "custom_liquid": "<style>.avisbls-container button,.wsatc-add-to-cart-btn,.cbb-frequently-bought-container button{background:var(--color-primary-button-background)!important;color:var(--color-primary-button-text)!important;border-radius:var(--style-border-radius-buttons-primary)!important;font-family:var(--button-font-family-primary)!important;border:none!important;box-shadow:none!important;text-transform:var(--button-text-case-primary)!important}.avisbls-container button:hover,.wsatc-add-to-cart-btn:hover,.cbb-frequently-bought-container button:hover{opacity:.85}</style>"
+              },
+              "blocks": {}
+            },
+            "wishlist_toggle_product": {
+              "type": "custom-liquid",
+              "settings": {
+                "custom_liquid": "<div style=\"display:flex;align-items:center;gap:8px;margin-top:8px\">{% render 'wishlist-toggle', product: product %}<span style=\"font-size:1.3rem;opacity:.75\">Save to Wishlist</span></div>"
+              },
+              "blocks": {}
+            },
+            "recently_viewed_tracker": {
+              "type": "custom-liquid",
+              "settings": {
+                "custom_liquid": "<script src=\"{{ 'recently-viewed.js' | asset_url }}\" type=\"module\"></script><recently-viewed-tracker data-handle=\"{{ product.handle }}\" hidden></recently-viewed-tracker>"
+              },
+              "blocks": {}
+            },
             "benefit_pills": {
               "type": "_benefit-pills",
-              "settings": {}
+              "settings": {
+                "pill_1": "No Preservatives",
+                "pill_2": "Traditional Recipe",
+                "pill_3": "Kerala Made",
+                "pill_4": "Small Batch"
+              },
+              "blocks": {}
             },
             "divider_VJhene": {
               "type": "_divider",
@@ -267,13 +297,24 @@
                     "custom_button_border": "{{ settings.color_palette.background }}"
                   },
                   "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
                 }
               },
               "block_order": []
             },
             "delivery_info": {
               "type": "_delivery-info",
-              "settings": {}
+              "settings": {
+                "line_1": "Free delivery on orders above ₹499",
+                "line_2": "Cash on Delivery (COD) available",
+                "line_3": "Easy 7-day return policy"
+              },
+              "blocks": {}
             },
             "text_aEtTtq": {
               "type": "text",
@@ -301,23 +342,13 @@
               },
               "blocks": {}
             },
-            "unify_app_cta_styles": {
+            "tabs_and_faq": {
               "type": "custom-liquid",
+              "name": "Benefits, Details & FAQ",
               "settings": {
-                "custom_liquid": "<style>.avisbls-container button,.wsatc-add-to-cart-btn,.cbb-frequently-bought-container button{background:var(--color-primary-button-background)!important;color:var(--color-primary-button-text)!important;border-radius:var(--style-border-radius-buttons-primary)!important;font-family:var(--button-font-family-primary)!important;border:none!important;box-shadow:none!important;text-transform:var(--button-text-case-primary)!important}.avisbls-container button:hover,.wsatc-add-to-cart-btn:hover,.cbb-frequently-bought-container button:hover{opacity:.85}</style>"
-              }
-            },
-            "wishlist_toggle_product": {
-              "type": "custom-liquid",
-              "settings": {
-                "custom_liquid": "<div style=\"display:flex;align-items:center;gap:8px;margin-top:8px\">{% render 'wishlist-toggle', product: product %}<span style=\"font-size:1.3rem;opacity:.75\">Save to Wishlist</span></div>"
-              }
-            },
-            "recently_viewed_tracker": {
-              "type": "custom-liquid",
-              "settings": {
-                "custom_liquid": "<script src=\"{{ 'recently-viewed.js' | asset_url }}\" type=\"module\"></script><recently-viewed-tracker data-handle=\"{{ product.handle }}\" hidden></recently-viewed-tracker>"
-              }
+                "custom_liquid": "<style>\n.mk-tabs{margin:20px 0}\n.mk-tabs__nav{display:flex;gap:4px;border-bottom:1px solid rgba(24,58,43,.15);margin-bottom:14px}\n.mk-tabs__btn{background:none;border:none;padding:10px 16px;font-size:.9rem;font-weight:600;color:rgba(24,58,43,.5);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:inherit}\n.mk-tabs__btn.is-active{color:#183A2B;border-bottom-color:#A8472E}\n.mk-tabs__panel[hidden]{display:none}\n.mk-benefits-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}\n.mk-benefits-list li{display:flex;align-items:center;gap:8px;font-size:.9rem;color:#183A2B}\n.mk-benefits-list li svg{width:16px;height:16px;color:#1a7a4c;flex-shrink:0}\n.mk-tabs__panel p{margin:0;font-size:.9rem;color:rgba(24,58,43,.75);line-height:1.6}\n\n.mk-faq{margin:24px 0}\n.mk-faq h3{font-size:1.05rem;font-weight:700;color:#183A2B;margin:0 0 10px}\n.mk-faq__item{border-bottom:1px solid rgba(24,58,43,.12)}\n.mk-faq__q{width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:none;padding:12px 0;font-size:.88rem;font-weight:600;color:#183A2B;cursor:pointer;text-align:left;font-family:inherit}\n.mk-faq__q span{font-size:1.1rem;color:#A8472E;flex-shrink:0;margin-left:12px}\n.mk-faq__item.is-open .mk-faq__q span{transform:rotate(45deg)}\n.mk-faq__a{padding:0 0 14px;font-size:.86rem;color:rgba(24,58,43,.75);line-height:1.6}\n.mk-faq__a[hidden]{display:none}\n</style>\n\n<div class=\"mk-tabs\">\n  <div class=\"mk-tabs__nav\">\n    <button type=\"button\" class=\"mk-tabs__btn is-active\" data-tab=\"benefits\">Benefits</button>\n    <button type=\"button\" class=\"mk-tabs__btn\" data-tab=\"details\">Product Details</button>\n  </div>\n  <div class=\"mk-tabs__panel\" data-panel=\"benefits\">\n    <ul class=\"mk-benefits-list\">\n      <li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\"><polyline points=\"20 6 9 17 4 12\"/></svg> No Preservatives</li>\n      <li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\"><polyline points=\"20 6 9 17 4 12\"/></svg> Traditional Recipe</li>\n      <li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\"><polyline points=\"20 6 9 17 4 12\"/></svg> Kerala Made</li>\n      <li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\"><polyline points=\"20 6 9 17 4 12\"/></svg> Small Batch</li>\n    </ul>\n  </div>\n  <div class=\"mk-tabs__panel\" data-panel=\"details\" hidden>\n    <p>{{ product.description | strip_html }}</p>\n  </div>\n</div>\n\n<div class=\"mk-faq\">\n  <h3>Questions?</h3>\n  <div class=\"mk-faq__item\">\n    <button type=\"button\" class=\"mk-faq__q\">Do you offer Cash on Delivery?<span>+</span></button>\n    <div class=\"mk-faq__a\" hidden><p>Yes, COD is available on eligible orders at checkout.</p></div>\n  </div>\n  <div class=\"mk-faq__item\">\n    <button type=\"button\" class=\"mk-faq__q\">How long does shipping take?<span>+</span></button>\n    <div class=\"mk-faq__a\" hidden><p>Orders are typically delivered within 4–7 business days.</p></div>\n  </div>\n  <div class=\"mk-faq__item\">\n    <button type=\"button\" class=\"mk-faq__q\">How should I store this product?<span>+</span></button>\n    <div class=\"mk-faq__a\" hidden><p>Store in a cool, dry place away from direct sunlight. Once opened, keep the pack tightly sealed to preserve freshness.</p></div>\n  </div>\n  <div class=\"mk-faq__item\">\n    <button type=\"button\" class=\"mk-faq__q\">Is this authentic to Kerala?<span>+</span></button>\n    <div class=\"mk-faq__a\" hidden><p>Yes — prepared following traditional Kerala recipes and methods, in small batches.</p></div>\n  </div>\n</div>\n\n<script>\n  (function(){\n    document.querySelectorAll('.mk-tabs__btn').forEach(function(btn){\n      btn.addEventListener('click', function(){\n        var tabs = btn.closest('.mk-tabs');\n        tabs.querySelectorAll('.mk-tabs__btn').forEach(function(b){ b.classList.remove('is-active'); });\n        btn.classList.add('is-active');\n        tabs.querySelectorAll('.mk-tabs__panel').forEach(function(p){ p.hidden = p.dataset.panel !== btn.dataset.tab; });\n      });\n    });\n    document.querySelectorAll('.mk-faq__q').forEach(function(q){\n      q.addEventListener('click', function(){\n        var item = q.closest('.mk-faq__item');\n        var isOpen = item.classList.toggle('is-open');\n        item.querySelector('.mk-faq__a').hidden = !isOpen;\n      });\n    });\n  })();\n</script>\n"
+              },
+              "blocks": {}
             }
           },
           "block_order": [
@@ -330,7 +361,8 @@
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",
             "delivery_info",
-            "text_aEtTtq"
+            "text_aEtTtq",
+            "tabs_and_faq"
           ]
         }
       },
@@ -349,25 +381,59 @@
         "padding-block-end": 0
       }
     },
-
-
     "reviews": {
       "type": "judge-me-reviews",
-      "settings": { "background_color": "#FFF7E8", "heading": "Loved by Our Customers", "subheading": "Real experiences from customers who enjoy our products." },
       "blocks": {
-        "judge_me_reviews_review_widget_A7mB4A": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "testimonial_1": {
+          "type": "testimonial",
           "settings": {
-            "review_data": "sample_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
+            "rating": 5,
+            "quote": "The color and aroma are completely different from what I get at the regular store — you can tell it's stone-ground and fresh. A little goes a long way too.",
+            "author": "Priya M.",
+            "product_name": "Turmeric Powder"
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Tastes exactly like the ones my grandmother used to make. Crispy, not overly oily, and the salt level is just right.",
+            "author": "Rahul S.",
+            "product_name": "Banana Chips"
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Finally found matta rice that actually tastes authentic. Cooks up perfectly and the packaging arrived without any damage.",
+            "author": "Fathima K.",
+            "product_name": "Matta Unda Rice"
           }
         }
       },
-      "block_order": ["judge_me_reviews_review_widget_A7mB4A"]
+      "block_order": [
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3"
+      ],
+      "settings": {
+        "background_color": "#fff7e8",
+        "heading": "What Our Customers Say",
+        "subheading": "Read real feedback from customers who love our food and trust our quality."
+      }
     },
-
+    "recently_viewed_section": {
+      "type": "custom-liquid",
+      "name": "Recently Viewed",
+      "settings": {
+        "custom_liquid": "<style>.recently-viewed-heading{font-size:1.25rem;margin:0 0 12px;color:#16241C}.recently-viewed-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}@media screen and (max-width:749px){.recently-viewed-grid{grid-template-columns:repeat(2,1fr)}}.recently-viewed-card{display:block;text-decoration:none;color:inherit}.recently-viewed-card__image{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;background:#FFF7E8}.recently-viewed-card__title{font-size:.85rem;margin:8px 0 2px;color:#16241C}.recently-viewed-card__price{font-size:.85rem;font-weight:600;margin:0;color:#A8472E}</style><script src=\"{{ 'recently-viewed.js' | asset_url }}\" type=\"module\"></script><recently-viewed-grid data-exclude-handle=\"{{ product.handle }}\" data-limit=\"4\"></recently-viewed-grid>",
+        "background_color": "",
+        "section_width": "page-width",
+        "padding-block-start": 24,
+        "padding-block-end": 48
+      }
+    },
     "product_recommendations_qggXJq": {
       "type": "product-recommendations",
       "blocks": {
@@ -507,16 +573,6 @@
         "gap": 28,
         "background_color": "{{ settings.color_palette.background }}",
         "padding-block-start": 48,
-        "padding-block-end": 48
-      }
-    },
-    "recently_viewed_section": {
-      "type": "custom-liquid",
-      "name": "Recently Viewed",
-      "settings": {
-        "custom_liquid": "<style>.recently-viewed-heading{font-size:1.25rem;margin:0 0 12px;color:#16241C}.recently-viewed-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}@media screen and (max-width:749px){.recently-viewed-grid{grid-template-columns:repeat(2,1fr)}}.recently-viewed-card{display:block;text-decoration:none;color:inherit}.recently-viewed-card__image{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;background:#FFF7E8}.recently-viewed-card__title{font-size:.85rem;margin:8px 0 2px;color:#16241C}.recently-viewed-card__price{font-size:.85rem;font-weight:600;margin:0;color:#A8472E}</style><script src=\"{{ 'recently-viewed.js' | asset_url }}\" type=\"module\"></script><recently-viewed-grid data-exclude-handle=\"{{ product.handle }}\" data-limit=\"4\"></recently-viewed-grid>",
-        "section_width": "page-width",
-        "padding-block-start": 24,
         "padding-block-end": 48
       }
     }

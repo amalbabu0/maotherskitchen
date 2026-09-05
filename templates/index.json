@@ -38,46 +38,127 @@
           },
           "blocks": {}
         },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
+        "hero_subtext": {
+          "type": "text",
+          "name": "t:names.text",
           "settings": {
-            "label": "Shop the Collection",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-custom",
-            "custom_button_background": "rgba(0,0,0,0)",
-            "custom_button_text": "#ffffff",
-            "custom_button_border": "{{ settings.color_palette.background }}",
-            "link_text_color": "",
+            "text": "<p>Authentic spices, rice, snacks and pickles, prepared the traditional Kerala way and delivered fresh to your door.</p>",
             "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "paragraph",
+            "font": "var(--font-body--family)",
+            "font_size": "1.1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "#ffffff",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 8,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
-        "reduce_hero_height": {
+        "hero_buttons_group": {
+          "type": "group",
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fit",
+            "custom_width": 100,
+            "width_mobile": "fit",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "button_explore_spices": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "Explore",
+                "link": "shopify://collections/spices-masala",
+                "open_in_new_tab": false,
+                "style_class": "button-custom",
+                "custom_button_background": "#d99a2b",
+                "custom_button_text": "#183a2b",
+                "custom_button_border": "#d99a2b",
+                "link_text_color": "",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "button_explore_spices"
+          ]
+        },
+        "adjust_hero_height": {
           "type": "custom-liquid",
           "settings": {
-            "custom_liquid": "<style>#shopify-section-{{ section.id }} .hero{min-height:calc(var(--hero-min-height) - 4cm) !important}</style>"
-          }
+            "custom_liquid": "<style>#shopify-section-{{ section.id }} .hero{--hero-min-height:calc(100svh - 2mm) !important}</style>"
+          },
+          "blocks": {}
+        },
+        "hide_scrollbar_home": {
+          "type": "custom-liquid",
+          "settings": {
+            "custom_liquid": "{% if template.name == 'index' %}<style>html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}</style>{% endif %}"
+          },
+          "blocks": {}
         }
       },
       "block_order": [
         "text_YLPk4p",
-        "button_H9gpTf",
-        "reduce_hero_height"
+        "hero_subtext",
+        "hero_buttons_group",
+        "adjust_hero_height",
+        "hide_scrollbar_home"
       ],
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "video",
         "image_1": "shopify://shop_images/bg.jpg",
-        "video_1": "shopify://files/videos/Woman_placing_spice_container_on…_202609040455.mp4",
+        "video_1": "shopify://files/videos/Generating_sequential_video_from…_202609051458.mp4",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
-        "media_type_1_mobile": "image",
+        "custom_mobile_media": true,
+        "media_type_1_mobile": "video",
+        "video_1_mobile": "shopify://files/videos/Vertical_video_animating_storybo…_202609051505.mp4",
         "media_type_2_mobile": "image",
         "link": "",
         "open_in_new_tab": false,
@@ -86,11 +167,11 @@
         "horizontal_alignment": "space-between",
         "vertical_alignment": "flex-end",
         "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
+        "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "flex-end",
         "gap": 24,
         "section_width": "page-width",
-        "section_height": "large",
+        "section_height": "full-screen",
         "section_height_custom": 50,
         "background_color": "rgba(0,0,0,0)",
         "toggle_overlay": true,
@@ -148,7 +229,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#183a2b",
+        "background_color": "#d99a2b",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -213,14 +294,57 @@
     "collection_tiles": {
       "type": "collection-bento",
       "blocks": {
-        "tile_1": { "type": "tile", "settings": { "collection": "spices-masala", "subtitle": "Stone-Ground Freshness" } },
-        "tile_2": { "type": "tile", "settings": { "collection": "sweets-halwa", "subtitle": "Traditional Recipes" } },
-        "tile_3": { "type": "tile", "settings": { "collection": "snacks", "subtitle": "Crunchy & Homemade" } },
-        "tile_4": { "type": "tile", "settings": { "collection": "pickles-condiments", "subtitle": "Tangy & Bold" } },
-        "tile_5": { "type": "tile", "settings": { "collection": "rice-grains", "subtitle": "Kerala Staples" } },
-        "tile_6": { "type": "tile", "settings": { "collection": "oils", "subtitle": "Cold-Pressed Purity" } }
+        "tile_1": {
+          "type": "tile",
+          "settings": {
+            "collection": "spices-masala",
+            "subtitle": "Stone-Ground Freshness"
+          }
+        },
+        "tile_2": {
+          "type": "tile",
+          "settings": {
+            "collection": "sweets-halwa",
+            "subtitle": "Traditional Recipes"
+          }
+        },
+        "tile_3": {
+          "type": "tile",
+          "settings": {
+            "collection": "snacks",
+            "subtitle": "Crunchy & Homemade"
+          }
+        },
+        "tile_4": {
+          "type": "tile",
+          "settings": {
+            "collection": "pickles-condiments",
+            "subtitle": "Tangy & Bold"
+          }
+        },
+        "tile_5": {
+          "type": "tile",
+          "settings": {
+            "collection": "rice-grains",
+            "subtitle": "Kerala Staples"
+          }
+        },
+        "tile_6": {
+          "type": "tile",
+          "settings": {
+            "collection": "oils",
+            "subtitle": "Cold-Pressed Purity"
+          }
+        }
       },
-      "block_order": ["tile_1", "tile_2", "tile_3", "tile_4", "tile_5", "tile_6"],
+      "block_order": [
+        "tile_1",
+        "tile_2",
+        "tile_3",
+        "tile_4",
+        "tile_5",
+        "tile_6"
+      ],
       "settings": {
         "background_color": ""
       }
@@ -438,7 +562,7 @@
         "bundle_product_1"
       ],
       "settings": {
-        "background_color": "#183a2b",
+        "background_color": "#d99a2b",
         "eyebrow": "COMPLETE YOUR FAVOURITES",
         "heading": "Save More With Our Combo Offers",
         "text": "<p>Turmeric, garam masala and matta rice bundled together at a better price.</p>",
@@ -460,8 +584,8 @@
             "landscape-padding": 40,
             "top-bottom-padding": 20,
             "scroll-video-tile-size": 80,
-            "scroll-video-tile-size-portrait": 80,
-            "min-height": 380
+            "scroll-video-tile-size-portrait": 130,
+            "min-height": 460
           }
         }
       },
@@ -508,49 +632,43 @@
     "reviews": {
       "type": "judge-me-reviews",
       "blocks": {
-        "judge_me_reviews_cards_carousel_JitXje": {
-          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "testimonial_1": {
+          "type": "testimonial",
           "settings": {
-            "show_sample_reviews": true,
-            "reviews_selection": "all",
-            "products": [],
-            "filter_pinned": false,
-            "filter_featured": false,
-            "filter_custom_tags": "",
-            "star_rating": "all",
-            "show_review_media": true,
-            "display_order": "media_first",
-            "no_image_fallback": "review_text_only",
-            "max_reviews": 20,
-            "review_length": "medium",
-            "text_size": "medium",
-            "image_ratio": "1",
-            "reviews_shown": 4,
-            "show_reviewer_name": true,
-            "show_product_name": true,
-            "hide_arrows_mobile": true,
-            "arrows_position": "sides",
-            "max_width": 1100,
-            "corner_styling": "soft",
-            "header_text_color": "#000000",
-            "text_color": "#000000",
-            "card_color": "#f9f9f9",
-            "stars_color": "",
-            "arrows_color": "#000000",
-            "transition_speed": 5,
-            "header_text": "Customers are saying",
-            "show_average_rating": true,
-            "rating_display": "default"
+            "rating": 5,
+            "quote": "The color and aroma are completely different from what I get at the regular store — you can tell it's stone-ground and fresh. A little goes a long way too.",
+            "author": "Priya M.",
+            "product_name": "Turmeric Powder"
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Tastes exactly like the ones my grandmother used to make. Crispy, not overly oily, and the salt level is just right.",
+            "author": "Rahul S.",
+            "product_name": "Banana Chips"
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Finally found matta rice that actually tastes authentic. Cooks up perfectly and the packaging arrived without any damage.",
+            "author": "Fathima K.",
+            "product_name": "Matta Unda Rice"
           }
         }
       },
       "block_order": [
-        "judge_me_reviews_cards_carousel_JitXje"
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3"
       ],
       "settings": {
         "background_color": "#fff7e8",
-        "heading": "Loved by Our Customers",
-        "subheading": "Real experiences from customers who enjoy our products."
+        "heading": "What Our Customers Say",
+        "subheading": "Read real feedback from customers who love our food and trust our quality."
       }
     },
     "why_choose_us": {
@@ -956,7 +1074,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#183a2b",
+        "background_color": "#d99a2b",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -989,7 +1107,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "text_color": "#183a2b",
+            "text_color": "#d99a2b",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -1014,7 +1132,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "text_color": "#183a2b",
+            "text_color": "#d99a2b",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -1032,9 +1150,9 @@
             "link": "shopify://collections/all",
             "open_in_new_tab": false,
             "style_class": "button-custom",
-            "custom_button_background": "#183a2b",
+            "custom_button_background": "#d99a2b",
             "custom_button_text": "#fff7e8",
-            "custom_button_border": "#183a2b",
+            "custom_button_border": "#d99a2b",
             "link_text_color": "",
             "width": "fit-content",
             "custom_width": 100,
@@ -1062,7 +1180,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#d99a2b",
+        "background_color": "#183a2b",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,

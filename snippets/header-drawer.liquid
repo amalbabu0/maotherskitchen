@@ -49,6 +49,14 @@
   fetchpriority="low"
 ></script>
 
+<style>
+  @media screen and (max-width: 989px) {
+    .menu-drawer {
+      background-image: linear-gradient(rgba(24, 58, 43, 0.6), rgba(24, 58, 43, 0.6)), url({{ 'nav-bar-mobile.jpg' | asset_url }});
+    }
+  }
+</style>
+
 <header-drawer
   class="header-drawer {{ class }}"
   style="--menu-image-border-radius: {{ image_border_radius }}px; --resource-card-corner-radius: {{ image_border_radius }}px;"
@@ -1488,5 +1496,30 @@
 
   .drawer-localization .language-selector .svg-wrapper.icon-caret svg {
     transform: none;
+  }
+
+  @media screen and (max-width: 989px) {
+    .menu-drawer {
+      background-size: cover;
+      background-position: center;
+    }
+    .menu-drawer .menu-drawer__menu-item,
+    .menu-drawer .menu-drawer__menu-item-text,
+    .menu-drawer summary.menu-drawer__menu-item {
+      color: #FFF7E8 !important;
+    }
+    .menu-drawer .resource-card__title,
+    .menu-drawer .resource-card__subtext,
+    .menu-drawer .price,
+    .menu-drawer .price-item__group {
+      color: #FFF7E8 !important;
+    }
+    .menu-drawer .compare-at-price {
+      color: rgba(255, 247, 232, 0.65) !important;
+    }
+    .menu-drawer .menu-drawer__close-button,
+    .menu-drawer .menu-drawer__back-button {
+      color: #FFF7E8 !important;
+    }
   }
 {% endstylesheet %}
