@@ -107,8 +107,8 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "Explore",
-                "link": "shopify://collections/spices-masala",
+                "label": "Explore →",
+                "link": "#shopify-section-template--28474060243312__collection_tiles",
                 "open_in_new_tab": false,
                 "style_class": "button-custom",
                 "custom_button_background": "#d99a2b",
@@ -1098,51 +1098,133 @@
           "static": true,
           "settings": {
             "text": "<h3>From Our Kitchen</h3>",
-            "type_preset": "rte"
-          }
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         },
         "static-blog-post-card": {
           "type": "_featured-blog-posts-card",
           "static": true,
-          "settings": {},
+          "settings": {
+            "alignment": "left",
+            "gap": 8,
+            "background_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
           "blocks": {
+            "image": {
+              "type": "_featured-blog-posts-image",
+              "static": true,
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0
+              },
+              "blocks": {}
+            },
             "title": {
               "type": "_heading",
               "static": true,
               "settings": {
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
                 "text": "<h4>{{ closest.article.title }}</h4>",
-                "show_alignment": false
-              }
+                "read_only": false,
+                "alignment": "left",
+                "show_alignment": false,
+                "text_color": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
             },
             "blog-post-info-text": {
               "type": "_blog-post-info-text",
               "static": true,
               "settings": {
+                "show_date": true,
+                "show_author": true,
+                "type_preset": "",
+                "alignment": "left",
+                "text_color": "",
+                "show_alignment": false,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
-                "show_alignment": false
-              }
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
             },
             "blog-post-description": {
               "type": "_blog-post-description",
               "static": true,
               "settings": {
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
                 "padding-block-start": 8,
-                "padding-block-end": 0
-              }
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
             }
-          }
+          },
+          "block_order": []
         }
       },
       "settings": {
         "blog": "recipes",
         "layout_type": "carousel",
+        "carousel_on_mobile": true,
         "post_limit": 6,
         "columns": 3,
-        "columns_gap": 8,
+        "mobile_columns": "2",
         "mobile_card_size": "80cqw",
+        "columns_gap": 8,
+        "rows_gap": 16,
         "icons_style": "arrow",
         "icons_shape": "circle",
+        "section_width": "page-width",
         "gap": 12,
         "background_color": "{{ settings.color_palette.background }}",
         "padding-block-start": 56,

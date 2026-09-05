@@ -11,7 +11,7 @@
     <p class="cookie-banner__heading">We respect your privacy</p>
     <p class="cookie-banner__text">
       This website uses cookies to ensure you get the best experience.
-      <a href="{{ 'privacy-policy' | shop_locale_url: 'policies' }}">Learn more</a>
+      <a href="/pages/terms-privacy">Learn more</a>
     </p>
   </div>
   <button type="button" class="cookie-banner__accept" id="cookie-banner-accept">Accept</button>
@@ -43,29 +43,31 @@
     align-items: center;
     gap: 1rem;
     padding: 1.4rem 2rem;
-    background: #ffffff;
-    color: #111111;
-    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    background: var(--color-background);
+    color: var(--color-foreground);
+    border-top: 1px solid color-mix(in srgb, var(--color-foreground) 15%, transparent);
     box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+    font-family: var(--font-body--family);
   }
   .cookie-banner[hidden] {
     display: none;
   }
-  .cookie-banner__icon { flex-shrink: 0; width: 28px; height: 28px; }
+  .cookie-banner__icon { flex-shrink: 0; width: 28px; height: 28px; color: var(--color-foreground); }
   .cookie-banner__icon svg { width: 100%; height: 100%; }
   .cookie-banner__body { flex-grow: 1; }
-  .cookie-banner__heading { margin: 0 0 0.3rem; font-size: 1.4rem; font-weight: 700; color: #111111; }
-  .cookie-banner__text { margin: 0; font-size: 1.3rem; color: #333333; }
+  .cookie-banner__heading { margin: 0 0 0.3rem; font-size: 1.4rem; font-weight: 700; color: var(--color-foreground); }
+  .cookie-banner__text { margin: 0; font-size: 1.3rem; color: color-mix(in srgb, var(--color-foreground) 80%, transparent); }
   .cookie-banner__text a { color: inherit; text-decoration: underline; }
   .cookie-banner__accept {
     flex-shrink: 0;
-    background: #111111;
-    color: #ffffff;
+    background: var(--color-primary-button-background);
+    color: var(--color-primary-button-text);
     border: none;
-    border-radius: 6px;
+    border-radius: var(--style-border-radius-buttons-primary);
     padding: 0.9rem 2rem;
     font-size: 1.3rem;
     font-weight: 600;
+    font-family: inherit;
     cursor: pointer;
   }
   .cookie-banner__accept:hover { opacity: 0.85; }

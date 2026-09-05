@@ -191,7 +191,7 @@
             "wishlist_toggle_product": {
               "type": "custom-liquid",
               "settings": {
-                "custom_liquid": "<div style=\"display:flex;align-items:center;gap:8px;margin-top:8px\">{% render 'wishlist-toggle', product: product %}<span style=\"font-size:1.3rem;opacity:.75\">Save to Wishlist</span></div>"
+                "custom_liquid": "<div id=\"wishlist-product-toggle\" class=\"product-action-icons\">{% render 'wishlist-toggle', product: product, class: 'wishlist-toggle--product' %}<button type=\"button\" id=\"product-share-btn\" class=\"wishlist-toggle__control\" aria-label=\"Share {{ product.title | escape }}\"><svg class=\"wishlist-toggle__icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"18\" cy=\"5\" r=\"3\"/><circle cx=\"6\" cy=\"12\" r=\"3\"/><circle cx=\"18\" cy=\"19\" r=\"3\"/><line x1=\"8.59\" y1=\"13.51\" x2=\"15.42\" y2=\"17.49\"/><line x1=\"15.41\" y1=\"6.51\" x2=\"8.59\" y2=\"10.49\"/></svg></button></div><script>(function(){var btn=document.getElementById('product-share-btn');if(!btn)return;btn.addEventListener('click',function(){var url=window.location.href;var title={{ product.title | json }};if(navigator.share){navigator.share({title:title,url:url}).catch(function(){});}else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){var original=btn.getAttribute('aria-label');btn.setAttribute('aria-label','Link copied!');setTimeout(function(){btn.setAttribute('aria-label',original);},2000);}).catch(function(){});}});})();</script>"
               },
               "blocks": {}
             },

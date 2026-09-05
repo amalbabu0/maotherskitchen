@@ -44,10 +44,18 @@ class WishlistButton extends HTMLElement {
   }
 
   toggle() {
+    if (this.dataset.loggedIn !== 'true') {
+      const returnUrl = window.location.pathname + window.location.search;
+      window.location.href = `/account/login?return_url=${encodeURIComponent(returnUrl)}`;
+      return;
+    }
     const list = getWishlist();
     const index = list.indexOf(this.handle);
     if (index === -1) {
       list.push(this.handle);
+      this.classList.remove('wishlist-pop');
+      void this.offsetWidth;
+      this.classList.add('wishlist-pop');
     } else {
       list.splice(index, 1);
     }

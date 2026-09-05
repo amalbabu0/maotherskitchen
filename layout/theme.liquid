@@ -32,6 +32,7 @@
       main[data-template="404"],
       main[data-template="blog"],
       main[data-template="article"],
+      main[data-template="product"],
       #header-component:not([transparent]),
       #header-component[data-sticky-state="active"],
       footer {
@@ -53,17 +54,83 @@
       main[data-template="404"] .section-background,
       main[data-template="blog"] .section-background,
       main[data-template="blog"] .blog-post-item,
-      main[data-template="article"] .section-background {
+      main[data-template="article"] .section-background,
+      main[data-template="product"] .section-background,
+      main[data-template="product"] .judgeme-reviews {
         background-color: color-mix(in srgb, var(--color-background) 45%, transparent) !important;
       }
       main[data-template="collection"] .product-card__content,
-      main[data-template="search"] .product-card__content {
+      main[data-template="search"] .product-card__content,
+      main[data-template="product"] .product-card__content {
         background-color: color-mix(in srgb, var(--color-background) 60%, transparent) !important;
       }
       @media screen and (min-width: 990px) {
         main[data-template="article"] .image-block {
           max-width: 936px;
           margin-inline: auto;
+        }
+      }
+      @media screen and (max-width: 749px) {
+        main[data-template="collection"] .main-collection-grid {
+          padding-left: 1rem;
+        }
+      }
+      .featured-product-custom__media {
+        border-radius: 0 !important;
+      }
+      /* Product page wishlist + share icons: on mobile only, pin them over
+         the image (stacked, like a typical mobile PDP) via pure CSS (no DOM
+         move — moving it into the media/product component subtree was
+         triggering Horizon's own re-render of those custom elements, which
+         silently double-bound the wishlist button's click handler on every
+         disconnect/reconnect). The media and details columns share a
+         common grid ancestor (product-component), which becomes the
+         positioning anchor; the wishlist block's own generic flex-item
+         wrapper divs default to position:relative in Horizon and would
+         otherwise intercept that anchoring first, so they're forced back
+         to static, scoped narrowly via :has() to this one block. On
+         desktop none of this applies — the icons stay inline near the
+         title, side by side. */
+      .product-action-icons {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      @media screen and (max-width: 749px) {
+        main[data-template="product"] product-component.product-information__grid {
+          position: relative;
+          z-index: 2;
+        }
+        main[data-template="product"] .group-block:has(.product-action-icons),
+        main[data-template="product"] .group-block-content:has(.product-action-icons) {
+          position: static !important;
+        }
+        /* The icons' own flex-item wrapper (a plain, unstyled div Horizon
+           generates per custom-liquid block) still reserves a full flex
+           "gap" on each side even once its content is pulled out with
+           position:absolute — leaving an empty gap where the block used to
+           be. Taking the wrapper itself out of flow removes that gap; the
+           icons render statically inside it as normal. */
+        main[data-template="product"] div:has(> .product-action-icons) {
+          position: absolute !important;
+          top: 10px;
+          right: 10px;
+          z-index: 999;
+          isolation: isolate;
+        }
+        main[data-template="product"] .product-action-icons {
+          position: static;
+          flex-direction: column;
+          margin-top: 0;
+        }
+        /* Same empty-gap issue for the invisible helper blocks (a <style>
+           tag and the hidden recently-viewed tracker) that sit between the
+           title and the benefit pills — collapse them out of the flex flow
+           entirely since they render no visible content either way. */
+        main[data-template="product"] div:has(> style:only-child),
+        main[data-template="product"] div:has(> recently-viewed-tracker) {
+          display: none;
         }
       }
       main[data-template="index"] [id*="trust_bar"] .trust-bar,
@@ -78,6 +145,12 @@
           url({{ 'site-background.png' | asset_url }}) !important;
         background-repeat: no-repeat, repeat !important;
         background-size: cover, 620px !important;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      #shopify-section-template--28474060243312__collection_tiles {
+        scroll-margin-top: 100px;
       }
     </style>
 
@@ -96,6 +169,9 @@
         main[data-template="page"] .contact-card {
           background-color: color-mix(in srgb, white 60%, transparent) !important;
         }
+        main[data-template="page"] [class*="video-block"] {
+          background-color: color-mix(in srgb, var(--color-background) 45%, transparent) !important;
+        }
         main[data-template="page"] #fs-message {
           height: 4rem;
           resize: none;
@@ -103,6 +179,87 @@
       </style>
     {%- endif -%}
 
+    {%- if template == 'page' and page.handle == 'about' -%}
+      <style>
+        /* About page bottom image block: bleed full width (no side gutter) and cap its height.
+           Targeted by the block's own id (image_nimPzq) rather than the image filename, since
+           the uploaded image gets swapped from the theme editor independently of this block. */
+        main[data-template="page"] .section--page-width:has([class*="image_nimPzq"]) {
+          grid-template-columns: 0 1fr 0 !important;
+        }
+        main[data-template="page"] [class*="image_nimPzq"] img {
+          max-height: 420px !important;
+          width: 100%;
+          object-fit: cover;
+        }
+      </style>
+    {%- endif -%}
+
+    <style>
+      /* Sticky nav: fade between transparent and solid instead of snapping */
+      #header-component,
+      #header-component .header__underlay {
+        transition: background-color 0.35s ease, background-image 0.35s ease;
+      }
+
+      /* Add to Cart button pulse */
+      .btn-pulse {
+        animation: add-to-cart-pulse 0.45s ease;
+      }
+      @keyframes add-to-cart-pulse {
+        0% { transform: scale(1); }
+        35% { transform: scale(0.94); }
+        65% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+      }
+
+      /* Cart icon bump, driven by the existing cart-bubble--animating state */
+      .header-actions__cart-icon:has(.cart-bubble--animating) svg {
+        animation: cart-icon-bump 0.45s ease;
+      }
+      @keyframes cart-icon-bump {
+        0% { transform: scale(1) rotate(0deg); }
+        30% { transform: scale(1.25) rotate(-8deg); }
+        60% { transform: scale(0.95) rotate(4deg); }
+        100% { transform: scale(1) rotate(0deg); }
+      }
+
+      /* Scroll-triggered reveal for trust bar, Why Choose Us, and blog cards */
+      .reveal-on-scroll {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .reveal-on-scroll.is-revealed {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Soft shimmer placeholder while product/blog images load */
+      img.img-loading {
+        background: linear-gradient(90deg, #f0ead8 25%, #faf5e8 50%, #f0ead8 75%);
+        background-size: 200% 100%;
+        animation: image-shimmer 1.3s ease-in-out infinite;
+      }
+      @keyframes image-shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .btn-pulse,
+        .header-actions__cart-icon:has(.cart-bubble--animating) svg,
+        img.img-loading {
+          animation: none;
+        }
+        .reveal-on-scroll {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+    </style>
+    <script src="{{ 'site-animations.js' | asset_url }}" type="module" defer></script>
     {% if request.design_mode %}
       {%- render 'theme-editor' -%}
     {% endif %}

@@ -132,51 +132,79 @@
   }
   .collection-bento__button:hover { opacity: 0.85; }
 
-  /* Below desktop: revert to the old plain tile grid — image with the
-     title below it, always visible, no hover-reveal, no bento spans. */
+  /* Below desktop: same bento-card look as desktop (image + gradient
+     overlay + title/subtitle/button), just in a simpler grid, since a
+     wide/tall bento span doesn't read well on a narrow screen. There's
+     no real :hover on touch, so reveal is driven by .is-active instead
+     (tap once to preview, tap again — or tap the button — to open). */
   @media screen and (max-width: 989px) {
+    .collection-bento .page-width {
+      padding-inline: 1.25rem;
+    }
     .collection-bento__grid {
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: auto;
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 220px;
+      grid-auto-flow: dense;
       gap: 1rem;
+      border: 0.5px solid transparent;
+      border-radius: 10px;
     }
     .collection-bento__item--big-tall,
     .collection-bento__item--tall {
       grid-column: span 1;
       grid-row: span 1;
     }
-    .collection-bento__item { background: none; border-radius: 8px; }
-    .collection-bento__media {
-      position: static;
-      aspect-ratio: 1 / 1;
-      border-radius: 8px;
-      overflow: hidden;
-      background: rgba(0, 0, 0, 0.05);
+    /* Bento rhythm: tile 1 normal, tiles 2 & 3 tall, tile 4 normal, repeating */
+    .collection-bento__item:nth-child(4n+2),
+    .collection-bento__item:nth-child(4n+3) {
+      grid-row: span 2;
     }
-    .collection-bento__item:hover .collection-bento__media img { transform: none; }
-    .collection-bento__overlay { display: none; }
-    .collection-bento__content {
-      position: static;
+    /* Never let a trailing tile end up tall with no partner to fill the row beside it */
+    .collection-bento__item:last-child {
+      grid-row: span 1;
+    }
+    .collection-bento__item.is-active .collection-bento__media img { transform: scale(1.08); }
+    .collection-bento__item.is-active .collection-bento__overlay { opacity: 1; }
+    .collection-bento__item.is-active .collection-bento__content {
       opacity: 1;
-      transform: none;
-      padding: 0.6rem 0 0;
-      gap: 0;
+      transform: translateY(0);
     }
-    .collection-bento__subtitle,
-    .collection-bento__button { display: none; }
     .collection-bento__title,
-    .collection-bento__item--big-tall .collection-bento__title {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--color-foreground);
-      text-align: center;
-    }
+    .collection-bento__item--big-tall .collection-bento__title { font-size: 1.4rem; }
+    .collection-bento__subtitle { font-size: 0.95rem; }
+    .collection-bento__button { font-size: 1rem; padding: 0.55rem 1.2rem; }
   }
 
-  @media screen and (max-width: 600px) {
-    .collection-bento__grid { grid-template-columns: repeat(2, 1fr); }
+  /* Mobile only (not tablet): no side padding, sharp corners instead of rounded */
+  @media screen and (max-width: 749px) {
+    .collection-bento .page-width {
+      padding-inline: 0;
+    }
+    .collection-bento__grid {
+      border-radius: 0;
+    }
+    .collection-bento__item {
+      border-radius: 0;
+    }
   }
 {% endstylesheet %}
+
+<script>
+  if (window.matchMedia('(hover: none)').matches) {
+    document.querySelectorAll('.collection-bento__item').forEach((item) => {
+      const link = item.querySelector('.collection-bento__link');
+      link.addEventListener('click', (event) => {
+        if (!item.classList.contains('is-active')) {
+          event.preventDefault();
+          document
+            .querySelectorAll('.collection-bento__item.is-active')
+            .forEach((other) => other !== item && other.classList.remove('is-active'));
+          item.classList.add('is-active');
+        }
+      });
+    });
+  }
+</script>
 
 {% schema %}
 {
